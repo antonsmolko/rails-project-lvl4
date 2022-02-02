@@ -11,3 +11,6 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import "bootstrap/dist/js/bootstrap.bundle.min"
+import "../../assets/stylesheets/application.css"

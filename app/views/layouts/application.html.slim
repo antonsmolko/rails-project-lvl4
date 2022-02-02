@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title
+      = content_for?(:title) ? yield(:title) : 'Bulletin'
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body.bg-light
+    header
+      = render 'layouts/shared/navigation'
+    = render 'layouts/shared/flash'
+    main.my-5[role="main"]
+      .container-xl
+        .card.p-3.p-md-4.p-lg-5.card-body.border-0.shadow
+          = content_for?(:content) ? yield(:content) : yield
