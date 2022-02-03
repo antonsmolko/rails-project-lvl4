@@ -1,0 +1,12 @@
+.d-flex.flex-column
+  h2 = t('.title')
+  hr.mb-5
+  .row.justify-content-center
+    .col-4
+      .d-flex.mb-4
+        hr.w-100.me-3
+        .m-auto.text-nowrap.small
+          = t('.social_lead')
+        hr.w-100.ms-3
+      .d-grid.gap-2.mx-auto
+        = link_to 'Github', auth_request_path('github'), method: :post, class: 'btn btn-secondary'

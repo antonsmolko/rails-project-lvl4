@@ -5,25 +5,25 @@ nav.navbar.navbar-static-top.navbar-expand-md
     = link_to root_path, class: 'navbar-brand link-dark' do
       = t('.logo')
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav.me-auto
-        / li.nav.navbar-nav
-        /   = link_to t('.bulletins'), root_path, class: 'nav-link link-dark'
-        / - if signed_in?
-        /   li.nav.navbar-nav
-        /     = link_to t('.add_bulletin'), new_bulletin_path, class: 'nav-link link-dark'
-        /   li.nav.navbar-nav
-        /     = link_to t('.my_bulletins'), profile_path, class: 'nav-link link-dark'
+      / ul.nav.navbar-nav.me-auto
+      /   li.nav.navbar-nav
+      /     = link_to t('.bulletins'), root_path, class: 'nav-link link-dark'
+      /   - if signed_in?
+      /     li.nav.navbar-nav
+      /       = link_to t('.add_bulletin'), new_bulletin_path, class: 'nav-link link-dark'
+      /     li.nav.navbar-nav
+      /       = link_to t('.my_bulletins'), profile_path, class: 'nav-link link-dark'
       ul.nav.navbar-nav.ms-auto
-        / - if signed_in?
-        /   - if policy(:dashboard).show?
-        /     li.nav-item
-        /       = link_to 'Admin', admin_root_path, class: 'nav-link link-dark'
-        /   li.nav-item
-        /     = link_to t('actions.sign_out'), sign_out_path, method: :delete, class: 'nav-link link-dark'
-        / - else
-        /   li.nav-item
-        /     = link_to t('actions.sign_in'), auth_request_path('github'), method: :post, class: 'nav-link link-dark'
-        /   li.nav-item
-        /     = link_to t('actions.sign_up'), new_user_registration_path, class: 'nav-link link-dark'
+        - if signed_in?
+          / - if policy(:dashboard).show?
+          /   li.nav-item
+          /     = link_to 'Admin', admin_root_path, class: 'nav-link link-dark'
+          li.nav-item
+            = link_to t('actions.sign_out'), sign_out_path, method: :delete, class: 'nav-link link-dark'
+        - else
+          li.nav-item
+            = link_to t('actions.sign_in'), auth_request_path('github'), method: :post, class: 'nav-link link-dark'
+          li.nav-item
+            = link_to t('actions.sign_up'), new_user_registration_path, class: 'nav-link link-dark'
 .container-fluid
   hr.w-100.border-1.border-top.border-dark.mt-1

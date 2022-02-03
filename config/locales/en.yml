@@ -30,4 +30,25 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  layouts:
+    shared:
+      navigation:
+        logo: Github quality
+  notice:
+    users:
+      created: User was successfully created.
+      deleted: User was successfully deleted.
+      updated: User was successfully updated.
+    categories:
+      created: Category was successfully created.
+      deleted: Category was successfully deleted.
+      updated: Category was successfully updated.
+    bulletins:
+      created: Bulletin was successfully created.
+      updated: Bulletin was successfully updated.
+      published: Bulletin was successfully published.
+      rejected: Bulletin was successfully rejected.
+      archived: Bulletin was successfully archived.
+      to_moderation: Bulletin was successfully submitted for moderation.
+    auth:
+      sign_in: You are successfully logged in
