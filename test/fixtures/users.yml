@@ -1,0 +1,13 @@
+one:
+  email: one@gmail.com
+  name: John Doe
+  nickname: johndoe
+  token: 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
+  image_url: https://avatars.githubusercontent.com/u/20865516?v=4
+
+two:
+  email: two@gmail.com
+  name: Sarah Conor
+  nickname: sarahconor
+  token: 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
+  image_url: https://avatars.githubusercontent.com/u/20865516?v=4

@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   scope module: :web do
     root 'home#index'
     get '/registration', to: 'registration#index', as: :new_user_registration
+
+    resources :repositories, only: %i[index show new create] do
+    end
   end
 end

@@ -34,21 +34,32 @@ en:
     shared:
       navigation:
         logo: Github quality
+        repositories: Repositories
   notice:
-    users:
-      created: User was successfully created.
-      deleted: User was successfully deleted.
-      updated: User was successfully updated.
-    categories:
-      created: Category was successfully created.
-      deleted: Category was successfully deleted.
-      updated: Category was successfully updated.
-    bulletins:
-      created: Bulletin was successfully created.
-      updated: Bulletin was successfully updated.
-      published: Bulletin was successfully published.
-      rejected: Bulletin was successfully rejected.
-      archived: Bulletin was successfully archived.
-      to_moderation: Bulletin was successfully submitted for moderation.
+    repositories:
+      added: Repository was successfully added.
+      github_cant_be_blank: Github can't be blank
     auth:
       sign_in: You are successfully logged in
+  web:
+    repositories:
+      index:
+        title: Repositories
+        new: New
+        table:
+          name: Name
+          language: Language
+          last_check_passed: Last check passed
+      show:
+        check: Check
+        description:
+          name: Name
+          language: Language
+          created_at: Created at
+          updated_at: Updated at
+          state: State
+          reference: Reference
+          check_passes: Check passes
+      form:
+        github: Github
+        create: Create Repository

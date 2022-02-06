@@ -1,0 +1,3 @@
+= simple_form_for :repo, url: repositories_path, method: :post do |f|
+  = f.input :full_name, collection: @repositories, label: t('.github'), label_method: :name, value_method: :full_name
+  = f.submit t('.create'), class: 'btn btn-success mt-3'

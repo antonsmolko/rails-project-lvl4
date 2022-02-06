@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_203201) do
+ActiveRecord::Schema.define(version: 2022_02_05_095002) do
+
+  create_table "repositories", force: :cascade do |t|
+    t.string "name"
+    t.string "full_name"
+    t.string "owner_login"
+    t.string "url"
+    t.string "language"
+    t.datetime "pushed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_repositories_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -20,6 +33,8 @@ ActiveRecord::Schema.define(version: 2022_02_03_203201) do
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "repositories", "users"
 end

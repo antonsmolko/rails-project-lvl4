@@ -1,0 +1,25 @@
+h1.mb-4 = @repository.full_name
+
+div.mb-4
+  = link_to t('.check'), new_repository_path, class: 'btn btn-primary'
+
+dl.row
+  dt.col-sm-3.col-lg-2 = t('.description.name')
+  dd.col-sm-9.col-lg-10 = @repository.full_name
+  dt.col-sm-3.col-lg-2 = t('.description.language')
+  dd.col-sm-9.col-lg-10 = @repository.language
+  dt.col-sm-3.col-lg-2 = t('.description.created_at')
+  dd.col-sm-9.col-lg-10 = @repository.created_at
+  dt.col-sm-3.col-lg-2 = t('.description.updated_at')
+  dd.col-sm-9.col-lg-10 = @repository.updated_at
+
+table.table.table-striped.table-hover.mt-4
+  thead
+    tr
+      th(scope="col")
+      th(scope="col") = t('.description.state')
+      th(scope="col") = t('.description.reference')
+      th(scope="col") = t('.description.check_passes')
+      th(scope="col") = t('.description.created_at')
+  tbody
+    tr

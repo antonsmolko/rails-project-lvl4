@@ -56,9 +56,11 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'minitest-power_assert'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'webmock'
 end
 
 group :production do
@@ -66,9 +68,12 @@ group :production do
 end
 
 gem 'aasm'
+gem 'enumerize'
+gem 'faker'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
+gem "octokit", "~> 4.0"
 gem 'pundit'
 gem 'rails-i18n'
 gem 'ransack'
