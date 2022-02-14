@@ -21,12 +21,13 @@ table.table.table-hover.mt-4
       th(scope="col") = t('.description.rule')
       th(scope="col") = t('.description.line_column')
   tbody
-    - @check.listing.each do |item|
-      tr
-        td(colspan="3")
-          = link_to item['filePath'], 'https://github.com'
-      - item['messages'].each do |item_message|
+    - unless @check.listing.nil?
+      - @check.listing.each do |item|
         tr
-          td = item_message['message']
-          td = item_message['ruleId']
-          td "#{item_message['line']}:#{item_message['column']}"
+          td(colspan="3")
+            = link_to item['filePath'], 'https://github.com'
+        - item['messages'].each do |item_message|
+          tr
+            td = item_message['message']
+            td = item_message['ruleId']
+            td "#{item_message['line']}:#{item_message['column']}"
