@@ -31,8 +31,10 @@ class Web::RepositoriesController < Web::ApplicationController
       r.owner_login = repository.owner.login
       r.full_name = repository.full_name
       r.url = repository.url
+      r.html_url = repository.html_url
       r.language = repository.language
       r.pushed_at = repository.pushed_at
+      r.git_url = repository.git_url
     end
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else

@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     get '/registration', to: 'registration#index', as: :new_user_registration
 
     resources :repositories, only: %i[index show new create] do
+      scope module: :repositories do
+        member do
+          resources :checks, only: :show, param: :check_id
+          post 'start-check', to: 'checks#start', as: :start_check
+        end
+      end
     end
   end
 end

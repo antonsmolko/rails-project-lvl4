@@ -1,0 +1,32 @@
+div.mb-4
+  = link_to t('.go_to_repository'), repository_path(@check.repository), class: 'btn btn-primary'
+
+h1.mb-4 = t('.title', id: @check.id)
+
+
+dl.row
+  dt.col-sm-3.col-lg-2 = t('.description.created_at')
+  dd.col-sm-9.col-lg-10 = l(@check.created_at, format: :long)
+  dt.col-sm-3.col-lg-2 = t('.description.status')
+  dd.col-sm-9.col-lg-10 = @check.state
+  dt.col-sm-3.col-lg-2 = t('.description.check_passed')
+  dd.col-sm-9.col-lg-10 = @check.passed
+  dt.col-sm-3.col-lg-2 = t('.description.issues_count')
+  dd.col-sm-9.col-lg-10 = @check.issues_count
+
+table.table.table-hover.mt-4
+  thead
+    tr
+      th(scope="col") = t('.description.message')
+      th(scope="col") = t('.description.rule')
+      th(scope="col") = t('.description.line_column')
+  tbody
+    - @check.listing.each do |item|
+      tr
+        td(colspan="3")
+          = link_to item['filePath'], 'https://github.com'
+      - item['messages'].each do |item_message|
+        tr
+          td = item_message['message']
+          td = item_message['ruleId']
+          td = "#{item_message['line']}:#{item_message['column']}"

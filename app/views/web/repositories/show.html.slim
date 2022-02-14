@@ -1,7 +1,7 @@
 h1.mb-4 = @repository.full_name
 
 div.mb-4
-  = link_to t('.check'), new_repository_path, class: 'btn btn-primary'
+  = link_to t('.check'), start_check_repository_path(@repository), method: :post, class: 'btn btn-primary'
 
 dl.row
   dt.col-sm-3.col-lg-2 = t('.description.name')
@@ -13,7 +13,7 @@ dl.row
   dt.col-sm-3.col-lg-2 = t('.description.updated_at')
   dd.col-sm-9.col-lg-10 = @repository.updated_at
 
-table.table.table-striped.table-hover.mt-4
+table.table.table-hover.mt-4
   thead
     tr
       th(scope="col")
@@ -22,4 +22,13 @@ table.table.table-striped.table-hover.mt-4
       th(scope="col") = t('.description.check_passes')
       th(scope="col") = t('.description.created_at')
   tbody
-    tr
+    - @repository.checks.order!('created_at DESC').each do |check|
+      tr
+        td
+          = link_to check.id, check_path(@repository.id, check.id)
+        td = check.state
+        td
+          - if check.reference_id
+            = link_to check.reference_id, "#{@repository.html_url}/commit/#{check.reference_id}"
+        td = check.passed
+        td = check.created_at

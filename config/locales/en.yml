@@ -63,3 +63,15 @@ en:
       form:
         github: Github
         create: Create Repository
+      checks:
+        show:
+          title: 'Check #%{id}'
+          go_to_repository: Go to repository
+          description:
+            created_at: Created at
+            status: Status
+            check_passed: Check passed
+            issues_count: Issues count
+            message: Message
+            rule: Rule
+            line_column: Line column

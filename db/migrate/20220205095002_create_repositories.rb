@@ -5,8 +5,10 @@ class CreateRepositories < ActiveRecord::Migration[6.1]
       t.string :full_name
       t.string :owner_login
       t.string :url
+      t.string :html_url
       t.string :language
       t.timestamp :pushed_at
+      t.string :git_url
 
       t.timestamps
 
