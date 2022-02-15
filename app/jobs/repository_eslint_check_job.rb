@@ -2,6 +2,8 @@ class RepositoryEslintCheckJob < ApplicationJob
   queue_as :default
 
   def perform(check, dir, last_commit_id)
+    raise StandardError unless Dir.exist? dir
+
     check.check!
 
     lint_cmd = "npx eslint -c .eslintrc.yml -f json"
@@ -16,5 +18,7 @@ class RepositoryEslintCheckJob < ApplicationJob
     )
       check.finish!
     end
+  rescue StandardError
+    check.mark_as_failed!
   end
 end
