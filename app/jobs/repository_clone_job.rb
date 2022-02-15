@@ -10,8 +10,7 @@ class RepositoryCloneJob < ApplicationJob
   def perform(check, repository_id)
     repository = Repository.find repository_id
 
-    @dir = "tmp/repos/#{repository.owner_login}/#{repository.name}"
-
+    @dir = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
     clone_cmd = "git clone #{repository.git_url}"
     get_last_commit_id_cmd = 'git rev-parse --short HEAD'
     Open3.capture3("#{clone_cmd} #{@dir}")
