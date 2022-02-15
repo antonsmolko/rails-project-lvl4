@@ -16,7 +16,7 @@ class RepositoryCloneJob < ApplicationJob
     repo_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}")
 
     FileUtils.rm_r repo_path if Dir.exist? repo_path
-    Dir.mkdir(repo_path)
+    FileUtils.mkdir_p repo_path
 
     @dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
     clone_cmd = "git clone #{repository.git_url}"
