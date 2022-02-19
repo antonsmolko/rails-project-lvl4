@@ -21,3 +21,27 @@ two:
   created_at: 2021-12-13 20:12:46.942221
   updated_at: 2021-12-13 20:12:46.942221
   user: :two
+
+js:
+  name: frontend-project-lvl2
+  full_name: johndoe/frontend-project-lvl2
+  owner_login: johndoe
+  url: https://api.github.com/repos/johndoe/frontend-project-lvl2
+  language: JavaScript
+  git_url: https://api.github.com/repos/johndoe/frontend-project-lvl2.git
+  pushed_at: 2021-12-13 20:12:46.942221
+  created_at: 2021-12-13 20:12:46.942221
+  updated_at: 2021-12-13 20:12:46.942221
+  user: :two
+
+ruby:
+  name: rails-project-lvl1
+  full_name: johndoe/rails-project-lvl2
+  owner_login: johndoe
+  url: https://api.github.com/repos/johndoe/rails-project-lvl2
+  language: Ruby
+  git_url: https://api.github.com/repos/johndoe/rails-project-lvl2.git
+  pushed_at: 2021-12-13 20:12:46.942221
+  created_at: 2021-12-13 20:12:46.942221
+  updated_at: 2021-12-13 20:12:46.942221
+  user: :two

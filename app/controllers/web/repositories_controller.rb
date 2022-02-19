@@ -3,6 +3,8 @@
 class Web::RepositoriesController < Web::ApplicationController
   before_action :require_signed_in_user!
 
+  AVAILABLE_LANGUAGES = %[javascript ruby]
+
   def index
     @repositories = current_user.repositories
   end
@@ -13,7 +15,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def new
     client = Octokit::Client.new access_token: current_user.token
-    @repositories = client.repos.select {|r| r[:language] == 'JavaScript' }
+    @repositories = client.repos.select { |r| is_available_language? r[:language] }
     @repository = Repository.new
   end
 
@@ -50,5 +52,9 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def repository_params
     params.require(:repo).permit(:full_name)
+  end
+
+  def is_available_language? language
+    !language.nil? && AVAILABLE_LANGUAGES.include?(language.downcase!)
   end
 end
