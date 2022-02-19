@@ -68,6 +68,7 @@ group :production do
 end
 
 gem 'aasm'
+gem 'dry-auto_inject'
 gem 'dry-container'
 gem 'enumerize'
 gem 'faker'

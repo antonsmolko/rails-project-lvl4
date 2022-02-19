@@ -12,7 +12,7 @@ class RepositoryEslintCheckJob < ApplicationJob
 
     if check.update!(
       reference_id: last_commit_id,
-      passed: listing.size > 0,
+      passed: listing.empty?,
       listing: listing,
       issues_count: listing.reduce(0) {|acc, file| acc + file['messages'].count }
     )

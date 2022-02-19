@@ -1,7 +1,10 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class Web::RegistrationControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test '#index' do
+    get new_user_registration_path
+    assert_response :success
+  end
 end

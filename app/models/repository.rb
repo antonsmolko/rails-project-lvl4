@@ -2,7 +2,7 @@
 
 class Repository < ApplicationRecord
   has_many :checks
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   validates :owner_login, presence: true
   validates :full_name, presence: true
