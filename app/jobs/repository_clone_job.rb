@@ -24,10 +24,11 @@ class RepositoryCloneJob < ApplicationJob
 
     @dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
     clone_cmd = "git clone #{repository.git_url}"
-    get_last_commit_id_cmd = 'git rev-parse --short HEAD'
     Open3.capture3("#{clone_cmd} #{@dir_path}")
 
-    @last_commit_id = Open3.popen3(get_last_commit_id_cmd, chdir: @dir_path) { |_stdin, stdout| stdout.read.chomp }
+    @last_commit_id = Open3.popen3('git rev-parse --short HEAD', chdir: @dir_path) do |_stdin, stdout|
+      stdout.read.chomp
+    end
   rescue StandardError
     check.mark_as_failed!
   end

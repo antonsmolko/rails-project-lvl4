@@ -1,33 +1,21 @@
 # frozen_string_literal: true
 
-FIXTURES_MAPPING = {
-  javascript: 'test/fixtures/files/check_eslint_response.json',
-  ruby: 'test/fixtures/files/check_rubocop_response.json'
-}.freeze
-
 class RepositoryCheckRunnerStub
   def self.start(repository)
     check = repository.checks.create!
-    language = repository.language.downcase!
 
     check.check!
 
-    response = File.read(Rails.root.join(FIXTURES_MAPPING[language.try :to_sym]) || '')
-    stdout = JSON.parse(response)
+    dir_path = Rails.root.join('test/fixtures/files/repos/', repository.owner_login, repository.name).to_s
 
-    data = StdoutSerializer.build stdout, language
-    issues_count = data[:issues_count]
-    last_commit_id = 'c5b480f'
-
-    if check.update!(
-      reference_id: last_commit_id,
-      passed: issues_count.zero?,
-      listing: data[:listing],
-      issues_count: issues_count
-    )
-      check.finish!
-    else
+    unless Dir.exist? dir_path
       check.mark_as_failed!
+      throw StandardError.new("Directory #{dir_path} does not exist")
     end
+
+    last_commit_id = Open3.popen3('git rev-parse --short HEAD', chdir: dir_path) { |_stdin, stdout| stdout.read.chomp }
+    language = repository.language.downcase!
+
+    RepositoryCheckJob.perform_later(check, dir_path, last_commit_id, language)
   end
 end
