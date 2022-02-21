@@ -35,9 +35,11 @@ class Web::RepositoriesController < Web::ApplicationController
       r.url = repository.url
       r.html_url = repository.html_url
       r.language = repository.language
+      r.github_id = repository.id
       r.pushed_at = repository.pushed_at
       r.git_url = repository.git_url
     end
+      GithubHookCreateJob.perform_later current_user.token, repository.id
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
       render :new

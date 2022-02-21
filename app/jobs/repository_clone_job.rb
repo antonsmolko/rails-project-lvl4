@@ -7,8 +7,8 @@ class RepositoryCloneJob < ApplicationJob
     RepositoryCheckJob.perform_later(job.arguments.first, @dir_path, @last_commit_id, @language)
   end
 
-  def perform(check, repository_id)
-    repository = Repository.find repository_id
+  def perform(check)
+    repository = check.repository
     tmp_repos_path = Rails.root.join('tmp/repos')
 
     @language = repository.language.downcase!

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.string "url"
     t.string "html_url"
     t.string "language"
+    t.bigint "github_id"
     t.datetime "pushed_at"
     t.string "git_url"
     t.datetime "created_at", precision: 6, null: false

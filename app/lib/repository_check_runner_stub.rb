@@ -6,8 +6,8 @@ FIXTURES_MAPPING = {
 }
 
 class RepositoryCheckRunnerStub
-  def self.start(check, repository_id)
-    repository = Repository.find repository_id
+  def self.start(repository)
+    check = repository.checks.create!
     language = repository.language.downcase!
 
     check.check!

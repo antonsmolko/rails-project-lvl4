@@ -7,6 +7,7 @@ class CreateRepositories < ActiveRecord::Migration[6.1]
       t.string :url
       t.string :html_url
       t.string :language
+      t.bigint :github_id
       t.timestamp :pushed_at
       t.string :git_url
 
