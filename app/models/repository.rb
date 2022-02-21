@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
-  has_many :checks
+  has_many :checks, dependent: :destroy
   belongs_to :user, dependent: :destroy
 
   validates :owner_login, presence: true

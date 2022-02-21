@@ -5,7 +5,6 @@ class StdoutSerializer
     serializer = case language
                  when 'javascript' then StdoutEslintSerializer.new
                  when 'ruby' then StdoutRubocopSerializer.new
-                 else nil
                  end
 
     throw StandardError.new("Unknown language: #{language}") if serializer.nil?

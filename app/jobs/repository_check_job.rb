@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
@@ -10,16 +12,16 @@ class RepositoryCheckJob < ApplicationJob
 
     lint_cmd = command_map[language.to_sym]
 
-    stdout = Open3.capture3("#{lint_cmd} #{dir}") { |_stdin, stdout, _stderr, wait_thr| [stdout.read, wait_thr.value] }
+    output = Open3.capture3("#{lint_cmd} #{dir}") { |_stdin, stdout| stdout.read }
 
-    parsed_data = JSON.parse(stdout[0])
+    parsed_data = JSON.parse(output[0])
 
     data = StdoutSerializer.build parsed_data, language
     issues_count = data[:issues_count]
 
     if check.update!(
       reference_id: last_commit_id,
-      passed: issues_count == 0,
+      passed: issues_count.zero?,
       listing: data[:listing],
       issues_count: issues_count
     )

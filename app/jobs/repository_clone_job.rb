@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositoryCloneJob < ApplicationJob
   queue_as :default
 

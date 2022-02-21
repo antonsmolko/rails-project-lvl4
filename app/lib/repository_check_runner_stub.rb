@@ -3,7 +3,7 @@
 FIXTURES_MAPPING = {
   javascript: 'test/fixtures/files/check_eslint_response.json',
   ruby: 'test/fixtures/files/check_rubocop_response.json'
-}
+}.freeze
 
 class RepositoryCheckRunnerStub
   def self.start(repository)
@@ -21,7 +21,7 @@ class RepositoryCheckRunnerStub
 
     if check.update!(
       reference_id: last_commit_id,
-      passed: issues_count == 0,
+      passed: issues_count.zero?,
       listing: data[:listing],
       issues_count: issues_count
     )

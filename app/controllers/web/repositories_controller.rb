@@ -3,7 +3,7 @@
 class Web::RepositoriesController < Web::ApplicationController
   before_action :require_signed_in_user!
 
-  AVAILABLE_LANGUAGES = %[javascript ruby]
+  AVAILABLE_LANGUAGES = %(javascript ruby)
 
   def index
     @repositories = current_user.repositories
@@ -15,18 +15,18 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def new
     client = Octokit::Client.new access_token: current_user.token
-    @repositories = client.repos.select { |r| is_available_language? r[:language] }
+    @repositories = client.repos.select { |r| available_language? r[:language] }
     @repository = Repository.new
   end
 
   def create
-    unless repository_params[:full_name].present?
+    if repository_params[:full_name].blank?
       redirect_to new_repository_path, notice: t('notice.repositories.github_cant_be_blank')
       return
     end
 
     client = Octokit::Client.new access_token: current_user.token
-    repository = client.repos.select {|r| r[:full_name] == repository_params[:full_name] }.first
+    repository = client.repos.select { |r| r[:full_name] == repository_params[:full_name] }.first
 
     if current_user.repositories.where(full_name: repository_params[:full_name]).first_or_create! do |r|
       r.name = repository.name
@@ -56,7 +56,7 @@ class Web::RepositoriesController < Web::ApplicationController
     params.require(:repo).permit(:full_name)
   end
 
-  def is_available_language? language
+  def available_language?(language)
     !language.nil? && AVAILABLE_LANGUAGES.include?(language.downcase!)
   end
 end

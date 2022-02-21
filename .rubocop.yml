@@ -5,12 +5,14 @@ require:
 
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 3.0.2
   Exclude:
     - 'bin/**'
     - 'db/schema.rb'
     - 'db/migrate/**'
     - 'vendor/**/*'
     - 'node_modules/**/*'
+    - 'tmp/**/*'
 
 Style/ClassAndModuleChildren:
   Enabled: false
