@@ -1,8 +1,7 @@
-div.mb-4
+.mb-4
   = link_to t('.go_to_repository'), repository_path(@check.repository), class: 'btn btn-primary'
 
 h1.mb-4 = t('.title', id: @check.id)
-
 
 dl.row
   dt.col-sm-3.col-lg-2 = t('.description.created_at')
@@ -21,7 +20,7 @@ table.table.table-hover.mt-4
       th(scope="col") = t('.description.rule')
       th(scope="col") = t('.description.line_column')
   tbody
-    - unless @check.listing.nil?
+    - if @check&.listing
       - @check.listing.each do |file|
         tr
           td(colspan="3")

@@ -3,8 +3,6 @@
 require 'test_helper'
 
 class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
-  include ActiveJob::TestHelper
-
   setup do
     @user = users :one
     sign_in(@user)
@@ -24,9 +22,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    perform_enqueued_jobs
-
-    repository_last_check = @repository_js.reload.checks.last
+    repository_last_check = @repository_js.checks.last
     assert { repository_last_check.state == 'finished' }
     assert { repository_last_check.issues_count == 18 }
   end
@@ -36,10 +32,8 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    perform_enqueued_jobs
-
-    repository_last_check = @repository_ruby.reload.checks.last
+    repository_last_check = @repository_ruby.checks.last
     assert { repository_last_check.state == 'finished' }
-    assert { repository_last_check.issues_count == 0 }
+    assert { repository_last_check.issues_count == 3 }
   end
 end
