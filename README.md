@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/antonsmolko/rails-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/antonsmolko/rails-project-lvl4/actions)
+[![CI](https://github.com/antonsmolko/rails-project-lvl4/actions/workflows/ci.yml/badge.svg)](https://github.com/antonsmolko/rails-project-lvl4/actions/workflows/ci.yml)
 
 ## System requirements
 * Ruby
