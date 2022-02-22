@@ -75,3 +75,8 @@ en:
             message: Message
             rule: Rule
             line_column: Line column
+  repository_check_mailer:
+    check_failed:
+      subject: Repository check report
+      title: Repository %{repository} check report
+      message: Validation failed or code contains errors

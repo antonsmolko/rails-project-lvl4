@@ -18,10 +18,11 @@ class RepositoryCheckJob < ApplicationJob
 
     data = StdoutSerializer.build parsed_data, language
     issues_count = data[:issues_count]
+    passed = issues_count.zero?
 
     if check.update!(
       reference_id: last_commit_id,
-      passed: issues_count.zero?,
+      passed: passed,
       listing: data[:listing],
       issues_count: issues_count
     )
@@ -29,6 +30,8 @@ class RepositoryCheckJob < ApplicationJob
     else
       StandardError
     end
+
+    check.send_failed unless passed
   rescue StandardError
     check.mark_as_failed!
   end
