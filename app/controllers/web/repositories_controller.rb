@@ -11,6 +11,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = repository_resource
+    authorize @repository
   end
 
   def new

@@ -32,7 +32,7 @@ js:
   pushed_at: 2021-12-13 20:12:46.942221
   created_at: 2021-12-13 20:12:46.942221
   updated_at: 2021-12-13 20:12:46.942221
-  user: :two
+  user: :one
 
 ruby:
   name: rails-project-lvl1
@@ -44,4 +44,4 @@ ruby:
   pushed_at: 2021-12-13 20:12:46.942221
   created_at: 2021-12-13 20:12:46.942221
   updated_at: 2021-12-13 20:12:46.942221
-  user: :two
+  user: :one

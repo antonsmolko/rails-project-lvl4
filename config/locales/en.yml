@@ -41,6 +41,7 @@ en:
       github_cant_be_blank: Github can't be blank
     auth:
       sign_in: You are successfully logged in
+      not_authorized: You are not authorized to perform this action.
   web:
     repositories:
       index:

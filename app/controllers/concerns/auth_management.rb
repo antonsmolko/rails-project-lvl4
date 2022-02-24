@@ -21,12 +21,10 @@ module AuthManagement
   def require_signed_in_user!
     return if current_user
 
-    redirect_back fallback_location: root_path
+    redirect_to root_path
   end
 
-  def require_admin!
-    return if current_user&.admin?
-
-    redirect_back fallback_location: root_path, alert: t('layouts.web.admin.flash.admins_only')
+  def user_not_authorized
+    redirect_to root_path, alert: t('notice.auth.not_authorized')
   end
 end
