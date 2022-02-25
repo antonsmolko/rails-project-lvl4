@@ -15,6 +15,9 @@ module GithubQuality
     routes.default_url_options = { host: ENV['BASE_URL'] }
     Rails.application.default_url_options = { host: ENV['BASE_URL'] }
     Rails.application.routes.default_url_options = { host: ENV['BASE_URL'] }
+    Rails.application.configure do
+      routes.default_url_options[:host] = ENV['BASE_URL']
+    end
     # config.action_controller.default_protect_from_forgery = false
     # Configuration for the application, engines, and railties goes here.
     #
