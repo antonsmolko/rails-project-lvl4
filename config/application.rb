@@ -12,16 +12,8 @@ module GithubQuality
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    # routes.default_url_options = { host: ENV['BASE_URL'] }
-    # config.action_controller.default_url_options = { host: ENV['BASE_URL'] }
-    # Rails.application.routes.default_url_options = { host: ENV['BASE_URL'] }
-    # Rails.application.configure do
-    #   routes.default_url_options[:host] = ENV['BASE_URL']
-    # end
 
-    Rails.application.routes.default_url_options = { host: ENV['BASE_URL'] }
-    Rails.application.default_url_options = { host: ENV['BASE_URL'] }
-    Rails.application.config.default_url_options = { host: ENV['BASE_URL'] }
+    routes.default_url_options = { host: ENV['BASE_URL'] }
     # config.action_controller.default_protect_from_forgery = false
     # Configuration for the application, engines, and railties goes here.
     #

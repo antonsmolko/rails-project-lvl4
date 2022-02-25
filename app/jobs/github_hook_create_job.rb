@@ -11,4 +11,10 @@ class GithubHookCreateJob < ApplicationJob
   rescue StandardError
     StandardError.new("Error while webhook creating for repository id: #{github_id}")
   end
+
+  class << self
+    def default_url_options
+      Rails.application.routes.default_url_options
+    end
+  end
 end
