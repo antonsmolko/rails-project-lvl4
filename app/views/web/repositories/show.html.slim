@@ -1,7 +1,7 @@
 h1.mb-4 = @repository.full_name
 
 .mb-4
-  = link_to t('.check'), start_check_repository_path(@repository), method: :post, class: 'btn btn-primary'
+  = link_to t('.check'), repository_checks_path(@repository), method: :post, class: 'btn btn-primary'
 
 dl.row
   dt.col-sm-3.col-lg-2 = t('.description.name')
@@ -25,7 +25,7 @@ table.table.table-hover.mt-4
     - @repository.checks.order!('created_at DESC').each do |check|
       tr
         td
-          = link_to check.id, check_path(@repository.id, check.id)
+          = link_to check.id, repository_check_path(@repository.id, check.id)
         td = check.aasm_state
         td
           - if check.reference_id

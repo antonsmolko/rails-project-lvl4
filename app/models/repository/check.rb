@@ -3,7 +3,7 @@
 class Repository::Check < ApplicationRecord
   include AASM
 
-  belongs_to :repository, dependent: :destroy
+  belongs_to :repository
 
   aasm whiny_transitions: false do
     state :created, initial: true

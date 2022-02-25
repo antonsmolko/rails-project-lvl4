@@ -15,12 +15,12 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#show' do
-    get check_path(@check.repository, @check)
+    get repository_check_path(@check.repository, @check)
     assert_response :success
   end
 
   test '#start_eslint_check' do
-    post start_check_repository_path @repository_js
+    post repository_checks_path @repository_js
 
     assert_response :redirect
 
@@ -32,7 +32,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#start_rubocop_check' do
-    post start_check_repository_path @repository_ruby
+    post repository_checks_path @repository_ruby
 
     assert_response :redirect
 

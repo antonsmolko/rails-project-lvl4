@@ -3,9 +3,10 @@
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
   include Import['repository_check_runner']
 
-  def start
+  def create
     repository = repository_resource
     check = repository.checks.create!({ language: repository.language })
+
     authorize check
 
     repository_check_runner.start check
@@ -14,7 +15,17 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
   end
 
   def show
-    @check = Repository::Check.find params[:check_id]
+    @check = check_resource
     authorize @check
+  end
+
+  private
+
+  def repository_resource
+    Repository.find params[:repository_id]
+  end
+
+  def check_resource
+    Repository::Check.find params[:id]
   end
 end
