@@ -3,17 +3,15 @@
 class RepositoryCloneJob < ApplicationJob
   queue_as :default
 
-  attr_accessor :last_commit_id, :dir_path, :language
+  attr_accessor :last_commit_id, :dir_path
 
   after_perform do |job|
-    RepositoryCheckJob.perform_later(job.arguments.first, @dir_path, @last_commit_id, @language)
+    RepositoryCheckJob.perform_later(job.arguments.first, @dir_path, @last_commit_id)
   end
 
   def perform(check)
     repository = check.repository
     tmp_repos_path = Rails.root.join('tmp/repos')
-
-    @language = repository.language.downcase!
 
     Dir.mkdir(tmp_repos_path) unless Dir.exist? tmp_repos_path
 

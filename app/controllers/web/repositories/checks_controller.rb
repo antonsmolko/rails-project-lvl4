@@ -5,7 +5,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
   def start
     repository = repository_resource
-    check = repository.checks.create!
+    check = repository.checks.create!({ language: repository.language })
     authorize check
 
     repository_check_runner.start check

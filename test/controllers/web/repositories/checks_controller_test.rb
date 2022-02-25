@@ -27,7 +27,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     perform_enqueued_jobs
 
     repository_last_check = @repository_js.reload.checks.last
-    assert { repository_last_check.state == 'finished' }
+    assert { repository_last_check.aasm_state == 'finished' }
     assert { repository_last_check.issues_count == 18 }
   end
 
@@ -39,7 +39,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     perform_enqueued_jobs
 
     repository_last_check = @repository_ruby.reload.checks.last
-    assert { repository_last_check.state == 'finished' }
+    assert { repository_last_check.aasm_state == 'finished' }
     assert { repository_last_check.issues_count == 3 }
   end
 end

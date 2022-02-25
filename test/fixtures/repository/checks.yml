@@ -4,6 +4,7 @@ one:
   issues_count: 28
   listing: []
   repository: one
+  language: javascript
 
 two:
   reference_id: c5b480f
@@ -11,3 +12,4 @@ two:
   issues_count: 0
   listing: []
   repository: two
+  language: javasctipt

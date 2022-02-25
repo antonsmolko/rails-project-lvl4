@@ -26,7 +26,7 @@ table.table.table-hover.mt-4
       tr
         td
           = link_to check.id, check_path(@repository.id, check.id)
-        td = check.state
+        td = check.aasm_state
         td
           - if check.reference_id
             = link_to check.reference_id, "#{@repository.html_url}/commit/#{check.reference_id}"

@@ -5,7 +5,7 @@ class Repository::Check < ApplicationRecord
 
   belongs_to :repository, dependent: :destroy
 
-  aasm column: 'state', whiny_transitions: false do
+  aasm whiny_transitions: false do
     state :created, initial: true
     state :checking, :finished, :failed
 

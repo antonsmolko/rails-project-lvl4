@@ -1,11 +1,12 @@
 class CreateRepositoryChecks < ActiveRecord::Migration[6.1]
   def change
     create_table :repository_checks do |t|
-      t.string :state
+      t.string :aasm_state
       t.string :reference_id
       t.boolean :passed, default: false
       t.integer :issues_count
       t.json :listing
+      t.string :language
 
       t.timestamps
 
