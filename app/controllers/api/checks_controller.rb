@@ -6,7 +6,7 @@ class Api::ChecksController < Api::ApplicationController
   protect_from_forgery except: :index
 
   def index
-    repository = Repository.find_by(github_id: payload_params['repository']['id'])
+    repository = Repository.find_by(github_id: github_id_params)
     repository_check_runner.start repository
 
     render status: :ok, json: { status: 'ok' }
@@ -14,7 +14,10 @@ class Api::ChecksController < Api::ApplicationController
 
   private
 
-  def payload_params
-    JSON.parse(params[:payload])
+  def github_id_params
+    nil unless params[:payload].present?
+    payload = JSON.parse(params[:payload])
+
+    payload[:repository][:id]
   end
 end
