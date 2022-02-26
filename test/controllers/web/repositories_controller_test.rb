@@ -29,6 +29,15 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     response = load_fixture('files/response.json')
 
     stub_request(:get, uri_template)
+      .with(
+        headers: {
+          'Accept' => 'application/vnd.github.v3+json',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Authorization' => 'token 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',
+          'Content-Type' => 'application/json',
+          'User-Agent' => 'Octokit Ruby Gem 4.22.0'
+        }
+      )
       .to_return(
         status: 200,
         body: response,
@@ -36,7 +45,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
       )
 
     post repositories_url, params: {
-      repo: @attrs
+      repository: @attrs
     }
 
     assert_response :redirect

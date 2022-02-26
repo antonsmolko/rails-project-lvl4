@@ -16,6 +16,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def new
     client = Octokit::Client.new access_token: current_user.token
+
     @repositories = client.repos.select { |r| available_language? r[:language] }
     @repository = Repository.new
   end
@@ -54,7 +55,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def repository_params
-    params.require(:repo).permit(:full_name)
+    params.require(:repository).permit(:full_name)
   end
 
   def available_language?(language)
