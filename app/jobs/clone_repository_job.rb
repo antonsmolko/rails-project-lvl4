@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class RepositoryCloneJob < ApplicationJob
+class CloneRepositoryJob < ApplicationJob
   queue_as :default
 
   attr_accessor :last_commit_id, :dir_path
 
   after_perform do |job|
-    RepositoryCheckJob.perform_later(job.arguments.first, @dir_path, @last_commit_id)
+    CheckRepositoryJob.perform_later(job.arguments.first, @dir_path, @last_commit_id)
   end
 
   def perform(check)

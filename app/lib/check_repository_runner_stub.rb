@@ -5,7 +5,7 @@ FIXTURES_MAPPING = {
   ruby: 'test/fixtures/files/check_rubocop_response.json'
 }.freeze
 
-class RepositoryCheckRunnerStub
+class CheckRepositoryRunnerStub
   def self.start(check)
     language = check.language
 

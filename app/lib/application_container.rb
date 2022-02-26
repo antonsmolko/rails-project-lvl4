@@ -4,8 +4,8 @@ class ApplicationContainer
   extend Dry::Container::Mixin
 
   if Rails.env.test?
-    register :repository_check_runner, -> { RepositoryCheckRunnerStub }
+    register :repository_check_runner, -> { CheckRepositoryRunnerStub }
   else
-    register :repository_check_runner, -> { RepositoryCheckRunner }
+    register :repository_check_runner, -> { CheckRepositoryRunner }
   end
 end
