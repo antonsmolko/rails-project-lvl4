@@ -7,15 +7,19 @@ class Api::ChecksController < Api::ApplicationController
 
   def index
     repository = Repository.find_by(github_id: github_id_params)
-    repository_check_runner.start repository
+    if repository.present?
+      repository_check_runner.start repository
 
-    render status: :ok, json: { status: 'ok' }
+      render status: :ok, json: { status: 'ok' }
+    else
+      render status: :unprocessable_entity, json: { status: 'unprocessable_entity' }
+    end
   end
 
   private
 
   def github_id_params
-    nil unless params[:payload].present?
+    nil if params[:payload].blank?
     payload = JSON.parse(params[:payload])
 
     payload[:repository][:id]
