@@ -12,7 +12,7 @@ class Api::ChecksController < Api::ApplicationController
 
     check = repository.checks.create!
 
-    CheckRepositoryRunner.start check.id
+    CheckRepositoryRunner.start check
 
     render status: :ok, json: { status: 'ok' }
   end

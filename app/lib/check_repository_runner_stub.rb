@@ -6,8 +6,7 @@ FIXTURES_MAPPING = {
 }.freeze
 
 class CheckRepositoryRunnerStub
-  def self.start(check_id)
-    check = Repository::Check.find check_id
+  def self.start(check)
     language = check.repository.language
 
     check.check!

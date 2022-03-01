@@ -9,7 +9,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
     authorize check
 
-    check_repository_runner.start check.id
+    check_repository_runner.start check
 
     redirect_to repository_path repository.reload
   end

@@ -3,9 +3,7 @@
 class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
-  def perform(check_id)
-    check = Repository::Check.find check_id
-
+  def perform(check)
     dir_path = clone_repository check
 
     raise StandardError unless Dir.exist? dir_path

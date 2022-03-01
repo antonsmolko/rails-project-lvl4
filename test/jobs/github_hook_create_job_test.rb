@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class RepositoryCloneJobTest < ActiveJob::TestCase
+class GithubHookCreateJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

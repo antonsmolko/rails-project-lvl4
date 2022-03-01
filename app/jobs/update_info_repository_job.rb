@@ -3,14 +3,11 @@
 class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :default
 
-  attr_accessor :check_id
-
   after_perform do |job|
     CheckRepositoryJob.perform_later job.arguments.first
   end
 
-  def perform(check_id)
-    check = Repository::Check.find check_id
+  def perform(check)
     repository = check.repository
     user = repository.user
     client = Octokit::Client.new access_token: user.token
