@@ -9,7 +9,7 @@ env:
 	cp -n .env.example .env || true
 
 setup:
-	cp -n .env.example .env || true
+	env
 	bin/setup
 	bin/rails db:fixtures:load
 	npx simple-git-hooks
