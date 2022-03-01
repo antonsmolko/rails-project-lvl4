@@ -10,6 +10,8 @@ class CreateRepositories < ActiveRecord::Migration[6.1]
       t.bigint :github_id
       t.timestamp :pushed_at
       t.string :git_url
+      t.string :last_commit_id
+      t.boolean :has_webhook, default: false
 
       t.timestamps
 

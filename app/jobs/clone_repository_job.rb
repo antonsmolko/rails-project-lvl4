@@ -3,13 +3,14 @@
 class CloneRepositoryJob < ApplicationJob
   queue_as :default
 
-  attr_accessor :last_commit_id, :dir_path
+  attr_accessor :dir_path
 
   after_perform do |job|
-    CheckRepositoryJob.perform_later(job.arguments.first, @dir_path, @last_commit_id)
+    CheckRepositoryJob.perform_later(job.arguments.first, @dir_path)
   end
 
-  def perform(check)
+  def perform(check_id)
+    check = Repository::Check.find check_id
     repository = check.repository
     tmp_repos_path = Rails.root.join('tmp/repos')
 
@@ -23,11 +24,8 @@ class CloneRepositoryJob < ApplicationJob
     @dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
     clone_cmd = "git clone #{repository.git_url}"
     Open3.capture3("#{clone_cmd} #{@dir_path}")
-
-    @last_commit_id = Open3.popen3('git rev-parse --short HEAD', chdir: @dir_path) do |_stdin, stdout|
-      stdout.read.chomp
-    end
   rescue StandardError
+    check ||= Repository::Check.find check_id
     check.mark_as_failed!
   end
 end

@@ -6,8 +6,9 @@ FIXTURES_MAPPING = {
 }.freeze
 
 class CheckRepositoryRunnerStub
-  def self.start(check)
-    language = check.language
+  def self.start(check_id)
+    check = Repository::Check.find check_id
+    language = check.repository.language
 
     check.check!
 
@@ -16,10 +17,10 @@ class CheckRepositoryRunnerStub
 
     data = StdoutSerializer.build stdout, language
     issues_count = data[:issues_count]
-    last_commit_id = 'c5b480f'
+    # last_commit_id = 'c5b480f'
 
     if check.update!(
-      reference_id: last_commit_id,
+      # reference_id: last_commit_id,
       passed: issues_count.zero?,
       listing: data[:listing],
       issues_count: issues_count

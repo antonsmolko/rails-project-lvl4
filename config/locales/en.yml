@@ -39,6 +39,7 @@ en:
     repositories:
       added: Repository was successfully added.
       github_cant_be_blank: Github can't be blank
+      create_failed: Unsuccessful repository creation
     auth:
       sign_in: You are successfully logged in
       not_authorized: You are not authorized to perform this action.
@@ -51,6 +52,7 @@ en:
           name: Name
           language: Language
           last_check_passed: Last check passed
+          no_checks_yet: No checks yet
       show:
         check: Check
         description:

@@ -22,29 +22,18 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def create
-    if repository_params[:full_name].blank?
+    if repository_params[:id].blank?
       redirect_to new_repository_path, notice: t('notice.repositories.github_cant_be_blank')
       return
     end
 
-    client = Octokit::Client.new access_token: current_user.token
-    repository = client.repos.select { |r| r[:full_name] == repository_params[:full_name] }.first
+    github_id = repository_params[:id].to_i
 
-    if current_user.repositories.where(full_name: repository_params[:full_name]).first_or_create! do |r|
-      r.name = repository.name
-      r.owner_login = repository.owner.login
-      r.full_name = repository.full_name
-      r.url = repository.url
-      r.html_url = repository.html_url
-      r.language = repository.language.downcase!
-      r.github_id = repository.id
-      r.pushed_at = repository.pushed_at
-      r.git_url = repository.git_url
-    end
-      GithubHookCreateJob.perform_later current_user.token, repository.id
+    if current_user.repositories.create!(github_id: github_id)
+      GithubHookCreateJob.perform_later github_id, current_user.token
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
-      render :new
+      redirect_to new_repository_path, notice: t('notice.repositories.create_failed')
     end
   end
 
@@ -55,7 +44,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:full_name)
+    params.require(:repository).permit(:id)
   end
 
   def available_language?(language)

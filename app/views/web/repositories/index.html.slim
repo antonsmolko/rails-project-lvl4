@@ -11,6 +11,6 @@ table.table.table-striped.table-hover.mt-4
     - @repositories.each do |repository|
       tr
         td
-          = link_to repository.name, repository_path(repository)
+          = link_to repository.name || '---', repository_path(repository)
         td = repository.language
-        td = repository.pushed_at
+        td = repository.pushed_at || t('.table.no_checks_yet')

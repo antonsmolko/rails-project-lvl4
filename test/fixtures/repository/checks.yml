@@ -1,5 +1,4 @@
 one:
-  reference_id: b68b838
   passed: false
   issues_count: 28
   listing: []
@@ -7,7 +6,6 @@ one:
   language: javascript
 
 two:
-  reference_id: c5b480f
   passed: true
   issues_count: 0
   listing: []

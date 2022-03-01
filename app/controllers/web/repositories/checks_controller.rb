@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
-  include Import['repository_check_runner']
+  include Import['check_repository_runner']
 
   def create
     repository = repository_resource
-    check = repository.checks.create!({ language: repository.language })
+    check = repository.checks.create!
 
     authorize check
 
-    repository_check_runner.start check
+    check_repository_runner.start check.id
 
     redirect_to repository_path repository.reload
   end

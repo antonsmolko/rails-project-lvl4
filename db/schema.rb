@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.bigint "github_id"
     t.datetime "pushed_at"
     t.string "git_url"
+    t.string "last_commit_id"
+    t.boolean "has_webhook", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
@@ -30,7 +32,6 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
 
   create_table "repository_checks", force: :cascade do |t|
     t.string "aasm_state"
-    t.string "reference_id"
     t.boolean "passed", default: false
     t.integer "issues_count"
     t.json "listing"

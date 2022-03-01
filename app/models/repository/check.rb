@@ -3,7 +3,7 @@
 class Repository::Check < ApplicationRecord
   include AASM
 
-  belongs_to :repository
+  belongs_to :repository, dependent: :destroy
 
   aasm whiny_transitions: false do
     state :created, initial: true
@@ -23,6 +23,6 @@ class Repository::Check < ApplicationRecord
   end
 
   def send_failed
-    RepositoryCheckMailer.with(check: self).check_failed.deliver_now
+    RepositoryCheckMailer.with(check: self).check_failed.deliver_later
   end
 end

@@ -1,27 +1,31 @@
 # frozen_string_literal: true
 
 class Api::ChecksController < Api::ApplicationController
-  include Import['repository_check_runner']
-
   protect_from_forgery except: :index
 
   def index
     repository = Repository.find_by(github_id: github_id_params)
-    if repository.present?
-      repository_check_runner.start repository
 
-      render status: :ok, json: { status: 'ok' }
-    else
+    if repository.blank?
       render status: :unprocessable_entity, json: { status: 'unprocessable_entity' }
     end
+
+    check = repository.checks.create!
+
+    CheckRepositoryRunner.start check.id
+
+    render status: :ok, json: { status: 'ok' }
   end
 
   private
 
   def github_id_params
-    nil if params[:payload].blank?
-    payload = JSON.parse(params[:payload])
+    nil if payload_params.blank?
+    payload_params['repository']['id']
+  end
 
-    payload[:repository][:id]
+  def payload_params
+    nil if params[:payload].blank?
+    JSON.parse(params[:payload])
   end
 end

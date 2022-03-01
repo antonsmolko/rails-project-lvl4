@@ -9,7 +9,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     @repository = repositories :one
     @attrs = {
-      full_name: 'octocat/Hello-World'
+      id: 1_296_269
     }
   end
 
@@ -50,12 +50,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    repository = Repository.find_by! full_name: @attrs[:full_name]
-    assert { repository.name.present? }
-
-    response_json = JSON.parse(response).first
-
-    assert { @attrs[:full_name] == repository.full_name }
-    assert { response_json['owner']['login'] == repository.owner_login }
+    repository = Repository.find_by! github_id: @attrs[:id]
+    assert { repository.github_id.present? }
+    assert { @attrs[:id] == repository.github_id }
   end
 end
