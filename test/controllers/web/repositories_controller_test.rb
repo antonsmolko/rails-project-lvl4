@@ -9,7 +9,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     @repository = repositories :one
     @attrs = {
-      id: 1_296_269
+      github_id: 1_296_269
     }
   end
 
@@ -50,8 +50,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    repository = Repository.find_by! github_id: @attrs[:id]
+    repository = Repository.find_by! github_id: @attrs[:github_id]
     assert { repository.github_id.present? }
-    assert { @attrs[:id] == repository.github_id }
+    assert { @attrs[:github_id] == repository.github_id }
   end
 end

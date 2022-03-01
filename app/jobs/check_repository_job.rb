@@ -3,15 +3,18 @@
 class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
-  def perform(check_id, dir)
+  def perform(check_id)
     check = Repository::Check.find check_id
-    raise StandardError unless Dir.exist? dir
+
+    dir_path = clone_repository check
+
+    raise StandardError unless Dir.exist? dir_path
 
     check.check!
 
     lint_cmd = command_map[check.repository.language.to_sym]
 
-    output = Open3.capture3("#{lint_cmd} #{dir}") { |_stdin, stdout| stdout.read }
+    output = Open3.capture3("#{lint_cmd} #{dir_path}") { |_stdin, stdout| stdout.read }
 
     parsed_data = JSON.parse(output[0])
 
@@ -37,6 +40,25 @@ class CheckRepositoryJob < ApplicationJob
   end
 
   private
+
+  def clone_repository(check)
+    repository = check.repository
+    tmp_repos_path = Rails.root.join('tmp/repos')
+
+    Dir.mkdir(tmp_repos_path) unless Dir.exist? tmp_repos_path
+
+    repo_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}")
+
+    FileUtils.rm_r repo_path if Dir.exist? repo_path
+    FileUtils.mkdir_p repo_path
+
+    dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
+
+    clone_cmd = "git clone #{repository.git_url}"
+    Open3.capture3("#{clone_cmd} #{dir_path}")
+
+    dir_path
+  end
 
   def command_map
     {

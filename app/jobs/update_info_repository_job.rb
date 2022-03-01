@@ -6,7 +6,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
   attr_accessor :check_id
 
   after_perform do |job|
-    CloneRepositoryJob.perform_later job.arguments.first
+    CheckRepositoryJob.perform_later job.arguments.first
   end
 
   def perform(check_id)

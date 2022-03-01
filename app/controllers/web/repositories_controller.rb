@@ -22,14 +22,14 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def create
-    if repository_params[:id].blank?
+    if repository_params[:github_id].blank?
       redirect_to new_repository_path, notice: t('notice.repositories.github_cant_be_blank')
       return
     end
 
-    github_id = repository_params[:id].to_i
+    github_id = repository_params[:github_id].to_i
 
-    if current_user.repositories.create!(github_id: github_id)
+    if current_user.repositories.where(github_id: github_id).first_or_create!
       GithubHookCreateJob.perform_later github_id, current_user.token
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
@@ -44,7 +44,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:id)
+    params.require(:repository).permit(:github_id)
   end
 
   def available_language?(language)
