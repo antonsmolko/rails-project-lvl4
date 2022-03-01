@@ -9,10 +9,10 @@ class UpdateInfoRepositoryJob < ApplicationJob
     CloneRepositoryJob.perform_later job.arguments.first
   end
 
-  def perform(check_id, user_id)
+  def perform(check_id)
     check = Repository::Check.find check_id
     repository = check.repository
-    user = User.find user_id
+    user = repository.user
     client = Octokit::Client.new access_token: user.token
 
     response = client.repo(repository.github_id)

@@ -2,8 +2,6 @@
 
 class CheckRepositoryRunner
   def self.start(check_id)
-    check = Repository::Check.find check_id
-    repository = check.repository
-    UpdateInfoRepositoryJob.perform_later check.id, repository.user.id
+    UpdateInfoRepositoryJob.perform_later check_id
   end
 end
