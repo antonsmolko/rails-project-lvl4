@@ -14,6 +14,10 @@ class CheckRepositoryJob < ApplicationJob
 
     output = Open3.capture3("#{lint_cmd} #{dir_path}") { |_stdin, stdout| stdout.read }
 
+    # rubocop:disable Rails/Output
+    p "check_repository_job#perform:output: #{output}"
+    # rubocop:enable Rails/Output
+
     parsed_data = JSON.parse(output[0])
 
     data = StdoutSerializer.build parsed_data, check.repository.language
