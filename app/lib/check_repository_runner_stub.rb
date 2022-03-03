@@ -16,10 +16,8 @@ class CheckRepositoryRunnerStub
 
     data = StdoutSerializer.build stdout, language
     issues_count = data[:issues_count]
-    # last_commit_id = 'c5b480f'
 
     if check.update!(
-      # reference_id: last_commit_id,
       passed: issues_count.zero?,
       listing: data[:listing],
       issues_count: issues_count

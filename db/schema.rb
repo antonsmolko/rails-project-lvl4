@@ -39,9 +39,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "repository_id"
-    t.integer "user_id"
     t.index ["repository_id"], name: "index_repository_checks_on_repository_id"
-    t.index ["user_id"], name: "index_repository_checks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,5 +55,4 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
 
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_checks", "repositories"
-  add_foreign_key "repository_checks", "users"
 end

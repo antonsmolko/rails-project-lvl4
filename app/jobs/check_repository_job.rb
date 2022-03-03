@@ -32,7 +32,8 @@ class CheckRepositoryJob < ApplicationJob
     end
 
     check.send_failed unless passed
-  rescue StandardError
+  rescue StandardError => e
+    logger.debug "check repository job error: #{e.message}"
     check ||= Repository::Check.find check_id
     check.mark_as_failed!
   end

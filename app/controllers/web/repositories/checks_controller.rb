@@ -11,7 +11,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
     check_repository_runner.start check
 
-    redirect_to repository_path repository.reload
+    redirect_to repository_path repository
   end
 
   def show
