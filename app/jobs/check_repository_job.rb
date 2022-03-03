@@ -34,6 +34,9 @@ class CheckRepositoryJob < ApplicationJob
     check.send_failed unless passed
   rescue StandardError => e
     logger.debug "check repository job error: #{e.message}"
+    # rubocop:disable Rails/Output
+    p "check repository job error: #{e.message}"
+    # rubocop:enable Rails/Output
     check ||= Repository::Check.find check_id
     check.mark_as_failed!
   end
