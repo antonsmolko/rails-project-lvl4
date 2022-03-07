@@ -26,6 +26,10 @@ class Api::ChecksController < Api::ApplicationController
 
   def payload_params
     nil if params[:payload].blank?
+    # rubocop:disable all
+    p 'params=' * 90
+    p params
+    # rubocop:enable all
     JSON.parse(params[:payload])
   end
 end
