@@ -4,7 +4,7 @@ class GithubRepositoriesApiStub
   def self.get(access_token)
     body = File.read(Rails.root.join('test/fixtures/files/github_repos_response.json'))
 
-    WebMock.stub_request(:get, 'https://api.github.com/user/repos')
+    response = WebMock.stub_request(:get, 'https://api.github.com/user/repos')
            .with(
              headers: {
                'Accept' => 'application/vnd.github.v3+json',
@@ -15,5 +15,7 @@ class GithubRepositoriesApiStub
              }
            )
            .to_return(status: 200, body: body, headers: {})
+
+    JSON.parse(response)
   end
 end
