@@ -16,7 +16,6 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
   def show
     @check = check_resource
-    authorize @check
   end
 
   private
