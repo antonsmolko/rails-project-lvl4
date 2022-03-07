@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Web::RepositoriesController < Web::ApplicationController
-  include Import['github_hook_create_runner']
+  include Import['github_hook_create_runner', 'github_repositories_api']
 
   before_action :require_signed_in_user!
 
@@ -17,9 +17,9 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def new
-    client = Octokit::Client.new access_token: current_user.token
+    client_repos = github_repositories_api.get current_user.token
 
-    @repositories = client.repos.select { |r| available_language? r[:language] }
+    @repositories = client_repos.select { |r| available_language? r[:language] }
     @repository = Repository.new
   end
 
