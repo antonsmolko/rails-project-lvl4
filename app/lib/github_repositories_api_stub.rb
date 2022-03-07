@@ -16,6 +16,11 @@ class GithubRepositoriesApiStub
                       )
                       .to_return(status: 200, body: body, headers: {})
 
+    # rubocop:disable all
+    p '=' * 90
+    p response
+    # rubocop:enable all
+
     JSON.parse(response)
   end
 end
