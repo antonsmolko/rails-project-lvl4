@@ -23,6 +23,11 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'new' do
+    get new_repository_url
+    assert_response :success
+  end
+
   test 'create' do
     uri_template = Addressable::Template.new 'https://api.github.com/user/repos'
 
