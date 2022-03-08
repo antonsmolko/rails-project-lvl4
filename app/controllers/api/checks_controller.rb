@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::ChecksController < Api::ApplicationController
+  include Import['check_repository_runner']
+
   protect_from_forgery except: :index
 
   def index
@@ -12,7 +14,7 @@ class Api::ChecksController < Api::ApplicationController
 
     check = repository.checks.create!
 
-    CheckRepositoryRunner.start check
+    check_repository_runner.start check
 
     render status: :ok, json: { status: 'ok' }
   end
