@@ -24,15 +24,15 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def create
-    if repository_params[:github_id].blank?
+    full_name = repository_params[:full_name]
+
+    if full_name.nil?
       redirect_to new_repository_path, notice: t('notice.repositories.github_cant_be_blank')
       return
     end
 
-    github_id = repository_params[:github_id].to_i
-
-    if current_user.repositories.where(github_id: github_id).first_or_create!
-      github_hook_create_runner.start github_id, current_user.token
+    if current_user.repositories.where(full_name: full_name).first_or_create!
+      github_hook_create_runner.start full_name, current_user.token
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
       redirect_to new_repository_path, notice: t('notice.repositories.create_failed')
@@ -46,7 +46,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def repository_params
-    params.require(:repository).permit(:github_id)
+    params.require(:repository).permit(:full_name)
   end
 
   def available_language?(language)

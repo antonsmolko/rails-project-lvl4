@@ -9,7 +9,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     @repository = repositories :one
     @attrs = {
-      github_id: 1_296_269
+      github_id: 1_296_269,
+      full_name: 'johndoe/frontend-project-lvl1'
     }
   end
 
@@ -55,8 +56,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    repository = Repository.find_by! github_id: @attrs[:github_id]
-    assert { repository.github_id.present? }
-    assert { @attrs[:github_id] == repository.github_id }
+    repository = Repository.find_by! full_name: @attrs[:full_name]
+    assert { repository.full_name.present? }
+    assert { @attrs[:full_name] == repository.full_name }
   end
 end

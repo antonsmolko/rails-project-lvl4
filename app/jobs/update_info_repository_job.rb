@@ -12,15 +12,13 @@ class UpdateInfoRepositoryJob < ApplicationJob
     user = repository.user
     client = Octokit::Client.new access_token: user.token
 
-    response = client.repo(repository.github_id)
+    response = client.repo(repository.full_name)
 
     repository_default_branch = client.branch(response.id, response.default_branch)
 
     last_commit_id = repository_default_branch.commit.sha[0, 7]
 
     response[:last_commit_id] = last_commit_id
-
-    repository = user.repositories.where(github_id: repository.github_id).first_or_initialize
 
     repository.update! serialize_repository_response(response)
   end

@@ -5,11 +5,11 @@ class GithubHookCreateJob < ApplicationJob
 
   queue_as :default
 
-  def perform(github_id, access_token)
+  def perform(full_name, access_token)
     client = Octokit::Client.new access_token: access_token
-    client.create_hook(github_id, 'web', url: api_checks_url)
+    client.create_hook(full_name, 'web', url: api_checks_url)
   rescue StandardError
-    StandardError.new("Error while webhook creating for repository id: #{github_id}")
+    StandardError.new("Error while webhook creating for repository: #{full_name}")
   end
 
   class << self

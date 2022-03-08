@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GithubHookCreateRunner
-  def self.start(github_id, user_token)
-    GithubHookCreateJob.perform_later github_id, user_token
+  def self.start(full_name, user_token)
+    GithubHookCreateJob.perform_later full_name, user_token
   end
 end

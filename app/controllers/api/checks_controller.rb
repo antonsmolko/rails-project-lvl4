@@ -4,7 +4,7 @@ class Api::ChecksController < Api::ApplicationController
   protect_from_forgery except: :index
 
   def index
-    repository = Repository.find_by(github_id: github_id_params)
+    repository = Repository.find_by!(full_name: repository_resource['full_name'])
 
     if repository.blank?
       render status: :unprocessable_entity, json: { status: 'unprocessable_entity' }
@@ -19,17 +19,8 @@ class Api::ChecksController < Api::ApplicationController
 
   private
 
-  def github_id_params
-    nil if payload_params.blank?
-    payload_params['repository']['id']
-  end
-
-  def payload_params
-    nil if params[:payload].blank?
-    # rubocop:disable all
-    p 'params=' * 90
-    p params
-    # rubocop:enable all
-    JSON.parse(params[:payload])
+  def repository_resource
+    request_params = params[:payload].nil? ? params : JSON.parse(params[:payload])
+    request_params['repository']
   end
 end
