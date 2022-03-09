@@ -9,8 +9,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     @repository = repositories :one
     @attrs = {
-      github_id: 1_296_269,
-      full_name: 'johndoe/frontend-project-lvl1'
+      github_id: 1_296_269
     }
   end
 
@@ -32,7 +31,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   test 'create' do
     uri_template = Addressable::Template.new 'https://api.github.com/user/repos'
 
-    response = load_fixture('files/response.json')
+    response = load_fixture('files/repository_response.json')
 
     stub_request(:get, uri_template)
       .with(
@@ -56,8 +55,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    repository = Repository.find_by! full_name: @attrs[:full_name]
-    assert { repository.full_name.present? }
-    assert { @attrs[:full_name] == repository.full_name }
+    repository = Repository.find_by! github_id: @attrs[:github_id]
+    assert { repository.github_id.present? }
+    assert { @attrs[:github_id] == repository.github_id }
   end
 end

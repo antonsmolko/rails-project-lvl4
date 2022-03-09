@@ -6,25 +6,8 @@ FIXTURES_MAPPING = {
 }.freeze
 
 class CheckRepositoryRunnerStub
-  def self.start(check)
-    language = check.repository.language
-
-    check.check!
-
-    response = File.read(Rails.root.join(FIXTURES_MAPPING[language.try :to_sym]) || '')
-    stdout = JSON.parse(response)
-
-    data = StdoutSerializer.build stdout, language
-    issues_count = data[:issues_count]
-
-    if check.update!(
-      passed: issues_count.zero?,
-      listing: data[:listing],
-      issues_count: issues_count
-    )
-      check.finish!
-    else
-      check.mark_as_failed!
-    end
+  def self.start(repository)
+    response = File.read(Rails.root.join(FIXTURES_MAPPING[repository.language.to_sym]) || '')
+    JSON.parse(response)
   end
 end

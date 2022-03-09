@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.datetime "pushed_at"
     t.string "git_url"
     t.string "last_commit_id"
-    t.boolean "has_webhook", default: false
+    t.boolean "has_webhook"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"

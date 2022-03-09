@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
 class Api::ChecksController < Api::ApplicationController
-  include Import['check_repository_runner']
-
   protect_from_forgery except: :index
 
   def index
-    repository = Repository.find_by!(full_name: repository_resource['full_name'])
+    repository = Repository.find_by!(full_name: repository_resource[:full_name])
 
     if repository.blank?
       render status: :unprocessable_entity, json: { status: 'unprocessable_entity' }
     end
 
-    check = repository.checks.create!
+    repository.update! has_webhook: true
+    repository.checks.create!
 
-    check_repository_runner.start check
+    UpdateInfoRepositoryJob.perform_later repository
 
     render status: :ok, json: { status: 'ok' }
   end
@@ -22,7 +21,6 @@ class Api::ChecksController < Api::ApplicationController
   private
 
   def repository_resource
-    request_params = params[:payload].nil? ? params : JSON.parse(params[:payload])
-    request_params['repository']
+    params.require(:repository).permit(:full_name)
   end
 end
