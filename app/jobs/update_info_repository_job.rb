@@ -26,6 +26,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
     response[:last_commit_id] = last_commit_id
 
     repository.update! serialize_repository_response(response)
+    repository
   end
 
   private
