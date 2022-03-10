@@ -19,9 +19,9 @@ class UpdateInfoRepositoryJob < ApplicationJob
     repository.update! serialize_repository_response(response)
 
     if repository.has_webhook
-      CheckRepositoryJob.perform_now repository
+      CheckRepositoryJob.perform_later repository
     else
-      GithubHookCreateJob.perform_now repository.github_id, repository.user.token
+      GithubHookCreateJob.perform_later repository.github_id, repository.user.token
     end
   end
 
