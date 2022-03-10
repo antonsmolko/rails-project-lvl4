@@ -7,7 +7,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     # authorize repository
     repository.checks.create!
 
-    UpdateInfoRepositoryJob.perform_later repository
+    CheckRepositoryJob.perform_later repository
 
     redirect_to repository_path repository
   end
