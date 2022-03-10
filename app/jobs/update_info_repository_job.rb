@@ -5,15 +5,6 @@ class UpdateInfoRepositoryJob < ApplicationJob
 
   attr_accessor :client
 
-  after_perform do |job|
-    repository = job.arguments.first
-    if repository.has_webhook
-      CheckRepositoryJob.perform_now repository
-    else
-      GithubHookCreateJob.perform_now repository.github_id, repository.user.token
-    end
-  end
-
   def perform(repository)
     octokit_client_api = ApplicationContainer[:octokit_client_api]
     @client = octokit_client_api.new repository.user.token
@@ -26,7 +17,12 @@ class UpdateInfoRepositoryJob < ApplicationJob
     response[:last_commit_id] = last_commit_id
 
     repository.update! serialize_repository_response(response)
-    repository
+
+    if repository.has_webhook
+      CheckRepositoryJob.perform_now repository
+    else
+      GithubHookCreateJob.perform_now repository.github_id, repository.user.token
+    end
   end
 
   private
