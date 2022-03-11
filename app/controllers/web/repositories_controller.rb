@@ -40,6 +40,10 @@ class Web::RepositoriesController < Web::ApplicationController
       p repository
       # rubocop: enable all
       UpdateInfoRepositoryJob.perform_now repository
+      # rubocop: disable all
+      p '-' * 90
+      p repository
+      # rubocop: enable all
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
       redirect_to new_repository_path, notice: t('notice.repositories.create_failed')
