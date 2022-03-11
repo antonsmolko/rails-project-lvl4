@@ -35,6 +35,10 @@ class Web::RepositoriesController < Web::ApplicationController
     repository = current_user.repositories.where(github_id: github_id.to_i).first_or_create!
 
     if repository
+      # rubocop: disable all
+      p '-' * 90
+      p repository
+      # rubocop: enable all
       UpdateInfoRepositoryJob.perform_now repository
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
