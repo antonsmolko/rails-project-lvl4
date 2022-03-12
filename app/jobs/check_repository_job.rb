@@ -20,7 +20,8 @@ class CheckRepositoryJob < ApplicationJob
     if @check.update!(
       passed: passed,
       listing: data[:listing],
-      issues_count: issues_count
+      issues_count: issues_count,
+      language: repository.language
     )
       @check.finish!
     else

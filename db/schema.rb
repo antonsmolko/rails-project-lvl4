@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.boolean "passed", default: false
     t.integer "issues_count"
     t.json "listing"
+    t.string "language"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "repository_id"

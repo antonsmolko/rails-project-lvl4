@@ -3,9 +3,11 @@ one:
   issues_count: 28
   listing: []
   repository: one
+  language: javascript
 
 two:
   passed: true
   issues_count: 0
   listing: []
   repository: two
+  language: javasctipt
