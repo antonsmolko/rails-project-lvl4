@@ -57,7 +57,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     repository = Repository.find_by! github_id: @attrs[:github_id]
     assert { repository.github_id.present? }
-    assert { repository.language == 'javascript' }
+    assert { repository.language == 'ruby' }
     assert { @attrs[:github_id] == repository.github_id }
   end
 end
