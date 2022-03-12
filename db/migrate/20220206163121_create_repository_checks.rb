@@ -5,7 +5,6 @@ class CreateRepositoryChecks < ActiveRecord::Migration[6.1]
       t.boolean :passed, default: false
       t.integer :issues_count
       t.json :listing
-      t.string :language
 
       t.timestamps
 
