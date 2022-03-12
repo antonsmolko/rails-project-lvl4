@@ -58,6 +58,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository = Repository.find_by! github_id: @attrs[:github_id]
     assert { repository.github_id.present? }
     assert { repository.language == 'ruby' }
+    assert { repository.full_name == 'Hexlet/hexlet-cv' }
     assert { @attrs[:github_id] == repository.github_id }
   end
 end

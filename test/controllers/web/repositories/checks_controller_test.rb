@@ -41,6 +41,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     repository_last_check = @repository_ruby.reload.checks.last
     assert { repository_last_check.aasm_state == 'finished' }
-    assert { repository_last_check.issues_count == 3 }
+    assert { repository_last_check.passed == true }
+    assert { repository_last_check.issues_count.zero? }
   end
 end

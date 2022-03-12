@@ -66,68 +66,10 @@
     {
       "path": "tmp/repos/antonsmolko/rails-project-lvl1/lib/hexlet_code/version.rb",
       "offenses": []
-    },
-    {
-      "path": "tmp/repos/antonsmolko/rails-project-lvl1/test/hexlet_code_test.rb",
-      "offenses": [
-        {
-          "severity": "convention",
-          "message": "Missing top-level documentation comment for `class HexletCodeTest`.",
-          "cop_name": "Style/Documentation",
-          "corrected": false,
-          "correctable": false,
-          "location": {
-            "start_line": 5,
-            "start_column": 1,
-            "last_line": 5,
-            "last_column": 20,
-            "length": 20,
-            "line": 5,
-            "column": 1
-          }
-        },
-        {
-          "severity": "convention",
-          "message": "Prefer `assert_not_nil` over `refute_nil`.",
-          "cop_name": "Rails/RefuteMethods",
-          "corrected": false,
-          "correctable": true,
-          "location": {
-            "start_line": 7,
-            "start_column": 5,
-            "last_line": 7,
-            "last_column": 14,
-            "length": 10,
-            "line": 7,
-            "column": 5
-          }
-        }
-      ]
-    },
-    {
-      "path": "tmp/repos/antonsmolko/rails-project-lvl1/test/test_helper.rb",
-      "offenses": [
-        {
-          "severity": "convention",
-          "message": "Missing top-level documentation comment for `module FixtureHelper`.",
-          "cop_name": "Style/Documentation",
-          "corrected": false,
-          "correctable": false,
-          "location": {
-            "start_line": 8,
-            "start_column": 1,
-            "last_line": 8,
-            "last_column": 20,
-            "length": 20,
-            "line": 8,
-            "column": 1
-          }
-        }
-      ]
     }
   ],
   "summary": {
-    "offense_count": 3,
+    "offense_count": 0,
     "target_file_count": 17,
     "inspected_file_count": 17
   }
