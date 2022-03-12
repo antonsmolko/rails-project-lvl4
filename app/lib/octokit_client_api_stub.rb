@@ -46,7 +46,7 @@ class OctokitClientApiStub
 
   private
 
-  def get_response(url, body = '', config = {})
+  def get_response(url, body = {}, config = {})
     data = WebMock.stub_request(:get, url)
                   .with(
                     headers: {

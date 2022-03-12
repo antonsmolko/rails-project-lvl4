@@ -35,7 +35,6 @@ class UpdateInfoRepositoryJob < ApplicationJob
       url: data['url'],
       html_url: data['html_url'],
       language: data['language'].downcase!,
-      github_id: data['id'],
       pushed_at: data['pushed_at'],
       git_url: data['git_url'],
       last_commit_id: data['last_commit_id']
