@@ -31,7 +31,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   test 'create' do
     uri_template = Addressable::Template.new 'https://api.github.com/user/repos'
 
-    response = load_fixture('files/repository_response.json')
+    response = load_fixture('files/javascript_repository_response.json')
 
     stub_request(:get, uri_template)
       .with(
@@ -57,6 +57,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     repository = Repository.find_by! github_id: @attrs[:github_id]
     assert { repository.github_id.present? }
+    assert { repository.language == 'javascript' }
     assert { @attrs[:github_id] == repository.github_id }
   end
 end

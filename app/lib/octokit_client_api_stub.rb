@@ -17,7 +17,14 @@ class OctokitClientApiStub
   end
 
   def repo(github_id)
-    body = File.read(Rails.root.join('test/fixtures/files/repository_response.json'))
+    mapping = {
+      404_106_344 => 'ruby',
+      1_296_269 => 'javascript'
+    }
+
+    language = mapping[github_id]
+
+    body = File.read(Rails.root.join("test/fixtures/files/#{language}_repository_response.json"))
     url = "https://api.github.com/repos/#{github_id}"
 
     get_response url, body

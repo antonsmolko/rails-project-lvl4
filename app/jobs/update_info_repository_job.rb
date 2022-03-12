@@ -19,6 +19,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
     repository.update! serialize_repository_response(response)
 
     if repository.has_webhook
+      repository.checks.create!
       CheckRepositoryJob.perform_later repository
     else
       GithubHookCreateJob.perform_later repository.github_id, repository.user.token
@@ -34,7 +35,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
       full_name: data['full_name'],
       url: data['url'],
       html_url: data['html_url'],
-      language: data['language'].downcase!,
+      language: data['language'].downcase,
       pushed_at: data['pushed_at'],
       git_url: data['git_url'],
       last_commit_id: data['last_commit_id']

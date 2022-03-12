@@ -6,7 +6,7 @@ class CheckRepositoryJob < ApplicationJob
   attr_accessor :check
 
   def perform(repository)
-    @check = repository.checks.where(aasm_state: 'created').last!
+    @check = repository.checks.where(aasm_state: 'created').last
     @check.check!
 
     check_repository_runner = ApplicationContainer[:check_repository_runner]
