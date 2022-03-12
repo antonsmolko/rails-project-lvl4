@@ -17,6 +17,11 @@ class OctokitClientApiStub
   end
 
   def repo(github_id)
+    #rubocop: disable all
+    p '=' * 90
+    p github_id
+    p '=' * 90
+    #rubocop: enable all
     mapping = {
       404_106_344 => 'ruby',
       1_296_269 => 'javascript'
