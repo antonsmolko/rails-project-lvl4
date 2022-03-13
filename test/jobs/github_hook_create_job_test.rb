@@ -5,7 +5,7 @@ require 'test_helper'
 class GithubHookCreateJobTest < ActiveJob::TestCase
   setup do
     @repository = repositories :ruby
-    @access_token = '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'
+    @access_token = '12345'
   end
 
   test '#create' do
