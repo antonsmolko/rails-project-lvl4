@@ -11,7 +11,6 @@ class Api::ChecksController < Api::ApplicationController
     end
 
     repository.update! has_webhook: true
-    repository.checks.create!
 
     UpdateInfoRepositoryJob.perform_later repository
 
