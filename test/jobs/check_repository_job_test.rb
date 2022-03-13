@@ -3,7 +3,15 @@
 require 'test_helper'
 
 class CheckRepositoryJobTest < ActiveJob::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @repository = repositories :ruby
+    @check = @repository.checks.create!
+  end
+
+  test '#check' do
+    CheckRepositoryJob.perform_now @repository
+    @check.reload
+    assert { @repository.checks.last == @check }
+    assert { @check.aasm_state == 'finished' }
+  end
 end

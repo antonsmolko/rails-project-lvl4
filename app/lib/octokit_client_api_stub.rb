@@ -32,6 +32,7 @@ class OctokitClientApiStub
 
   def create_hook(repo_id)
     url = "https://api.github.com/repositories/#{repo_id}/hooks"
+    body = ['success'].to_json
     config = {
       body: {
         name: 'web',
@@ -41,12 +42,12 @@ class OctokitClientApiStub
       }
     }
 
-    get_response url, '', config
+    get_response url, body, config
   end
 
   private
 
-  def get_response(url, body = {}, config = {})
+  def get_response(url, body = '{}', config = {})
     data = WebMock.stub_request(:get, url)
                   .with(
                     headers: {
