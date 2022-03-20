@@ -2,7 +2,7 @@
 
 class CheckRepositoryRunner
   COMMAND_MAP = {
-    javascript: 'npx eslint -c .eslintrc.yml -f json',
+    javascript: 'npx eslint -f json',
     ruby: 'rubocop --format json'
   }.freeze
 
@@ -13,7 +13,7 @@ class CheckRepositoryRunner
 
     lint_cmd = COMMAND_MAP[repository.language.to_sym]
 
-    output = Open3.capture3("#{lint_cmd} #{dir_path}") { |_stdin, stdout| stdout.read }
+    output = Open3.capture3("cd #{dir_path} && #{lint_cmd}") { |_stdin, stdout| stdout.read }
 
     JSON.parse(output[0])
   end
