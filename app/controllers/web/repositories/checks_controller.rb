@@ -3,8 +3,6 @@
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
   def create
     repository = repository_resource
-
-    # authorize repository
     repository.checks.create!
 
     CheckRepositoryJob.perform_later repository

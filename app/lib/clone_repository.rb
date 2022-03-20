@@ -5,7 +5,7 @@ class CloneRepository
     tmp_repos_dir_name = 'repos'
     tmp_repos_path = Rails.root.join('tmp', tmp_repos_dir_name)
 
-    Dir.mktmpdir(tmp_repos_dir_name) unless Dir.exist? tmp_repos_path
+    FileUtils.mktmpdir(tmp_repos_dir_name) unless Dir.exist? tmp_repos_path
 
     repo_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}")
 
