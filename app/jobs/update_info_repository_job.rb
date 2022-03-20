@@ -37,7 +37,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
       html_url: data['html_url'],
       language: data['language'].downcase,
       pushed_at: data['pushed_at'],
-      git_url: data['git_url'],
+      clone_url: data['clone_url'],
       last_commit_id: data['last_commit_id']
     }
   end

@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_163121) do
     t.string "language"
     t.bigint "github_id"
     t.datetime "pushed_at"
-    t.string "git_url"
+    t.string "clone_url"
     t.string "last_commit_id"
     t.boolean "has_webhook"
     t.datetime "created_at", precision: 6, null: false

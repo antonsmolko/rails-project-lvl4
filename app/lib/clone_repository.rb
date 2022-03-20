@@ -2,9 +2,10 @@
 
 class CloneRepository
   def self.start(repository)
-    tmp_repos_path = Rails.root.join('tmp/repos')
+    tmp_repos_dir_name = 'repos'
+    tmp_repos_path = Rails.root.join('tmp', tmp_repos_dir_name)
 
-    Dir.mkdir(tmp_repos_path) unless Dir.exist? tmp_repos_path
+    Dir.mktmpdir(tmp_repos_dir_name) unless Dir.exist? tmp_repos_path
 
     repo_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}")
 
@@ -13,9 +14,7 @@ class CloneRepository
 
     dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
 
-    raise StandardError(t('lib.clone_repository.start.errors.dir_not_exist')) unless Dir.exist? dir_path
-
-    clone_cmd = "git clone #{repository.git_url}"
+    clone_cmd = "git clone #{repository.clone_url}"
     Open3.capture3("#{clone_cmd} #{dir_path}")
 
     dir_path

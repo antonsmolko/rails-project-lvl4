@@ -5,8 +5,6 @@ class Web::RepositoriesController < Web::ApplicationController
 
   before_action :require_signed_in_user!
 
-  AVAILABLE_LANGUAGES = %w[javascript ruby].freeze
-
   def index
     @repositories = current_user.repositories
   end
@@ -53,6 +51,6 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def available_language?(language)
-    !language.nil? && AVAILABLE_LANGUAGES.include?(language.downcase)
+    !language.nil? && Repository::AVAILABLE_LANGUAGES.include?(language.downcase)
   end
 end

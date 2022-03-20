@@ -4,7 +4,7 @@ one:
   owner_login: johndoe
   url: https://api.github.com/repos/johndoe/frontend-project-lvl1
   language: javascript
-  git_url: https://api.github.com/repos/johndoe/frontend-project-lvl1.git
+  clone_url: https://api.github.com/repos/johndoe/frontend-project-lvl1.git
   pushed_at: 2021-12-13 20:12:46.942221
   last_commit_id: b68b838
   github_id: 1_296_268
@@ -19,7 +19,7 @@ two:
   owner_login: johndoe
   url: https://api.github.com/repos/johndoe/frontend-project-lvl2
   language: javascript
-  git_url: https://api.github.com/repos/johndoe/frontend-project-lvl2.git
+  clone_url: https://api.github.com/repos/johndoe/frontend-project-lvl2.git
   pushed_at: 2021-12-13 20:12:46.942221
   last_commit_id: c5b480f
   github_id: 1_296_267
@@ -34,7 +34,7 @@ js:
   owner_login: johndoe
   url: https://api.github.com/repos/johndoe/frontend-project-lvl1
   language: javascript
-  git_url: https://api.github.com/repos/johndoe/frontend-project-lvl1.git
+  clone_url: https://api.github.com/repos/johndoe/frontend-project-lvl1.git
   pushed_at: 2021-12-13 20:12:46.942221
   last_commit_id: b68b838
   github_id: 1_296_269
@@ -49,7 +49,7 @@ ruby:
   owner_login: johndoe
   url: https://api.github.com/repos/johndoe/rails-project-lvl1
   language: ruby
-  git_url: https://api.github.com/repos/johndoe/rails-project-lvl1.git
+  clone_url: https://api.github.com/repos/johndoe/rails-project-lvl1.git
   pushed_at: 2021-12-13 20:12:46.942221
   last_commit_id: f33z432d
   github_id: 404_106_344
