@@ -78,6 +78,11 @@ en:
             message: Message
             rule: Rule
             line_column: Line column
+  lib:
+    clone_repository:
+      start:
+        errors:
+          dir_not_exist: Directory %{dir} not exist!
   repository_check_mailer:
     check_failed:
       subject: Repository check report

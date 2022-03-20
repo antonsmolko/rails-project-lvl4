@@ -13,6 +13,8 @@ class CloneRepository
 
     dir_path = Rails.root.join("tmp/repos/#{repository.owner_login}/#{repository.name}").to_s
 
+    raise StandardError(t('lib.clone_repository.start.errors.dir_not_exist')) unless Dir.exist? dir_path
+
     clone_cmd = "git clone #{repository.git_url}"
     Open3.capture3("#{clone_cmd} #{dir_path}")
 
