@@ -6,9 +6,9 @@ class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
   def perform(check_id)
-    check = Repository::Check.find(check_id)
+    check = Repository::Check.find check_id
     return unless check.created?
 
-    CheckRepositoryService.check(check)
+    CheckRepositoryService.check check
   end
 end

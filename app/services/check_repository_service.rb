@@ -25,7 +25,8 @@ class CheckRepositoryService
     end
 
     check.send_failed unless passed
-  rescue StandardError
+  rescue StandardError => e
+    StandardError.new("Check repository job error: #{e.message}")
     check.mark_as_failed!
   end
 end
