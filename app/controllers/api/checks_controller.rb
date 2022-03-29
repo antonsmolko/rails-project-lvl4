@@ -12,7 +12,7 @@ class Api::ChecksController < Api::ApplicationController
 
     repository.update! has_webhook: true
 
-    UpdateInfoRepositoryJob.perform_later repository
+    UpdateInfoRepositoryJob.perform_later repository.id
 
     render status: :ok, json: { status: 'ok' }
   end

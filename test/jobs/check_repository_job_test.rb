@@ -9,7 +9,7 @@ class CheckRepositoryJobTest < ActiveJob::TestCase
   end
 
   test '#check' do
-    CheckRepositoryJob.perform_now @repository
+    CheckRepositoryJob.perform_now @repository.id
     @check.reload
     assert { @repository.checks.last == @check }
     assert { @check.aasm_state == 'finished' }

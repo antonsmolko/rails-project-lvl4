@@ -29,6 +29,7 @@ two:
   user: :two
 
 js:
+  id: 1296269
   name: frontend-project-lvl1
   full_name: johndoe/frontend-project-lvl1
   owner_login: johndoe
@@ -44,6 +45,7 @@ js:
   user: :one
 
 ruby:
+  id: 404106344
   name: rails-project-lvl1
   full_name: johndoe/rails-project-lvl1
   owner_login: johndoe

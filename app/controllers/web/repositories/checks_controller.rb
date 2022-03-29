@@ -5,7 +5,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     repository = repository_resource
     repository.checks.create!
 
-    CheckRepositoryJob.perform_later repository
+    CheckRepositoryJob.perform_later repository.id
 
     redirect_to repository_path repository
   end

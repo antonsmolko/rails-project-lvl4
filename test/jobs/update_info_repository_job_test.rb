@@ -8,9 +8,9 @@ class UpdateInfoRepositoryJobTest < ActiveJob::TestCase
   end
 
   test '#update' do
-    UpdateInfoRepositoryJob.perform_now @repository
+    UpdateInfoRepositoryJob.perform_now @repository.id
     assert { @repository.checks.size == 1 }
     assert { @repository.name == 'rails-project-lvl1' }
-    assert { @repository.owner_login == 'antonsmolko' }
+    assert { @repository.owner_login == 'johndoe' }
   end
 end

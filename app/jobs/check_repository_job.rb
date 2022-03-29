@@ -3,11 +3,10 @@
 class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
-  attr_accessor :check
-
-  def perform(repository)
-    @check = repository.checks.where(aasm_state: 'created').last
-    @check.check!
+  def perform(repository_id)
+    repository = Repository.find repository_id
+    check = repository.checks.where(aasm_state: 'created').last
+    check.check!
 
     check_repository_runner = ApplicationContainer[:check_repository_runner]
     check_data = check_repository_runner.start repository
@@ -17,20 +16,20 @@ class CheckRepositoryJob < ApplicationJob
     issues_count = data[:issues_count]
     passed = issues_count.zero?
 
-    if @check.update!(
+    if check.update!(
       passed: passed,
       listing: data[:listing],
       issues_count: issues_count,
       language: repository.language
     )
-      @check.finish!
+      check.finish!
     else
       StandardError
     end
 
-    @check.send_failed unless passed
+    check.send_failed unless passed
   rescue StandardError => e
     logger.debug "check repository job error: #{e.message}"
-    @check.mark_as_failed!
+    check.mark_as_failed!
   end
 end

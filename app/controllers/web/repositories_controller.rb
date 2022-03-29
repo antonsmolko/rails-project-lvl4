@@ -33,7 +33,7 @@ class Web::RepositoriesController < Web::ApplicationController
     repository = current_user.repositories.where(github_id: github_id.to_i).first_or_create!
 
     if repository
-      UpdateInfoRepositoryJob.perform_later repository
+      UpdateInfoRepositoryJob.perform_later repository.id
       redirect_to repositories_path, notice: t('notice.repositories.added')
     else
       redirect_to new_repository_path, notice: t('notice.repositories.create_failed')

@@ -3,14 +3,13 @@
 class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :default
 
-  attr_accessor :client
-
-  def perform(repository)
+  def perform(repository_id)
+    repository = Repository.find repository_id
     octokit_client_api = ApplicationContainer[:octokit_client_api]
-    @client = octokit_client_api.new repository.user.token
+    client = octokit_client_api.new repository.user.token
 
-    response = @client.repo repository.github_id
-    repository_default_branch = @client.branch(response['id'], response['default_branch'])
+    response = client.repo repository.github_id
+    repository_default_branch = client.branch(response['id'], response['default_branch'])
 
     last_commit_id = repository_default_branch['commit']['sha'][0, 7]
 
@@ -20,7 +19,7 @@ class UpdateInfoRepositoryJob < ApplicationJob
 
     if repository.has_webhook
       repository.checks.create!
-      CheckRepositoryJob.perform_later repository
+      CheckRepositoryJob.perform_later repository.id
     else
       GithubHookCreateJob.perform_later repository.github_id, repository.user.token
     end
