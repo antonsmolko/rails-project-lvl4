@@ -18,8 +18,8 @@ class UpdateInfoRepositoryJob < ApplicationJob
     repository.update! serialize_repository_response(response)
 
     if repository.has_webhook
-      repository.checks.create!
-      CheckRepositoryJob.perform_later repository.id
+      check = repository.checks.create!
+      CheckRepositoryJob.perform_later check.id
     else
       GithubHookCreateJob.perform_later repository.github_id, repository.user.token
     end

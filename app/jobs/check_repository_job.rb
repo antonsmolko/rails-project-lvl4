@@ -1,35 +1,14 @@
 # frozen_string_literal: true
 
+require_relative '../services/check_repository_service'
+
 class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
-  def perform(repository_id)
-    repository = Repository.find repository_id
-    check = repository.checks.where(aasm_state: 'created').last
-    check.check!
+  def perform(check_id)
+    check = Repository::Check.find(check_id)
+    return unless check.created?
 
-    check_repository_runner = ApplicationContainer[:check_repository_runner]
-    check_data = check_repository_runner.start repository
-
-    data = StdoutSerializer.build check_data, repository.language
-
-    issues_count = data[:issues_count]
-    passed = issues_count.zero?
-
-    if check.update!(
-      passed: passed,
-      listing: data[:listing],
-      issues_count: issues_count,
-      language: repository.language
-    )
-      check.finish!
-    else
-      StandardError
-    end
-
-    check.send_failed unless passed
-  rescue StandardError => e
-    logger.debug "check repository job error: #{e.message}"
-    check.mark_as_failed!
+    CheckRepositoryService.check(check)
   end
 end
