@@ -14,7 +14,7 @@ class Web::AuthController < Web::ApplicationController
       sign_in user
       redirect_to root_path, notice: t('notice.auth.sign_in')
     else
-      redirect_to new_user_registration_url
+      head :unauthorized, notice: t('notice.auth.authorization_failed')
     end
   end
 

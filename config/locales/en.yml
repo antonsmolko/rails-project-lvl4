@@ -42,6 +42,8 @@ en:
       create_failed: Unsuccessful repository creation
     auth:
       sign_in: You are successfully logged in
+      sign_out: You are successfully logged out
+      authorization_failed: Authorization failed
       not_authorized: You are not authorized to perform this action.
   web:
     repositories:

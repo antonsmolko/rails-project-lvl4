@@ -7,7 +7,7 @@ module AuthConcern
 
   def sign_out
     reset_session
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: t('notice.auth.sign_out')
   end
 
   def signed_in?
@@ -21,7 +21,7 @@ module AuthConcern
   def require_signed_in_user!
     return if current_user
 
-    redirect_to root_path
+    redirect_to root_path, notice: t('notice.auth.not_authorized')
   end
 
   def user_not_authorized
