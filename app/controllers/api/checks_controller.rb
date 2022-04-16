@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Api::ChecksController < Api::ApplicationController
-  protect_from_forgery except: :create
-
   def create
     repository = Repository.find_by!(full_name: repository_resource[:full_name])
 
