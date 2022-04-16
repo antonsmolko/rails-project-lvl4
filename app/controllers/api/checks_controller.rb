@@ -2,10 +2,10 @@
 
 class Api::ChecksController < Api::ApplicationController
   def create
-    repository = Repository.find_by!(full_name: repository_params[:full_name])
+    repository = Repository.find_by(full_name: repository_params[:full_name])
 
     if repository.blank?
-      head :unprocessable_entity
+      return head :not_found
     end
 
     repository.update! has_webhook: true
