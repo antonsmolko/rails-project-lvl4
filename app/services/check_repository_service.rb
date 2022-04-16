@@ -16,8 +16,7 @@ class CheckRepositoryService
     if check.update!(
       passed: passed,
       listing: data[:listing],
-      issues_count: issues_count,
-      language: repository.language
+      issues_count: issues_count
     )
       check.finish!
     else
