@@ -2,7 +2,7 @@
 
 class Api::ChecksController < Api::ApplicationController
   def create
-    repository = Repository.find_by!(full_name: repository_resource[:full_name])
+    repository = Repository.find_by!(full_name: repository_params[:full_name])
 
     if repository.blank?
       head :unprocessable_entity
@@ -17,7 +17,7 @@ class Api::ChecksController < Api::ApplicationController
 
   private
 
-  def repository_resource
+  def repository_params
     params.require(:repository).permit(:full_name)
   end
 end
