@@ -6,7 +6,7 @@ class Web::RepositoriesController < Web::ApplicationController
   before_action :require_signed_in_user!
 
   def index
-    @repositories = current_user.repositories
+    @repositories = current_user.repositories.page params[:page]
   end
 
   def show

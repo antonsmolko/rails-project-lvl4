@@ -11,4 +11,6 @@ class Repository < ApplicationRecord
   enumerize :language, in: AVAILABLE_LANGUAGES, skip_validations: true
 
   validates :github_id, presence: true
+
+  paginates_per 5
 end

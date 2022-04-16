@@ -1,0 +1,4 @@
+li.page-item
+  - # rubocop:disable Rails/OutputSafety
+  == link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, remote: remote, class: 'page-link'
+  - # rubocop:enable Rails/OutputSafety
