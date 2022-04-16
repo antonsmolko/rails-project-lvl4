@@ -51,6 +51,6 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def available_language?(language)
-    !language.nil? && Repository::AVAILABLE_LANGUAGES.include?(language.downcase)
+    language.present? && Repository::AVAILABLE_LANGUAGES.include?(language.downcase)
   end
 end
