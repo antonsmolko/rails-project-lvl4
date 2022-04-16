@@ -4,6 +4,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
   def create
     repository = repository_resource
     check = repository.checks.create!
+    authorize check
 
     CheckRepositoryJob.perform_later check.id
 
@@ -12,6 +13,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
   def show
     @check = resource
+    authorize @check
   end
 
   private

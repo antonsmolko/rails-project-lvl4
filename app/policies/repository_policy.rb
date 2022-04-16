@@ -4,4 +4,8 @@ class RepositoryPolicy < ApplicationPolicy
   def show?
     owner?
   end
+
+  def create?
+    owner?
+  end
 end
