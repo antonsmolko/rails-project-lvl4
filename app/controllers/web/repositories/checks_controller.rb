@@ -11,16 +11,12 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
   end
 
   def show
-    @check = check_resource
+    @check = resource
   end
 
   private
 
-  def repository_resource
-    Repository.find params[:repository_id]
-  end
-
-  def check_resource
+  def resource
     Repository::Check.find params[:id]
   end
 end
