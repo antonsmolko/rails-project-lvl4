@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     delete 'auth', to: 'auth#destroy', as: :sign_out
 
     root 'home#index'
-    get '/registration', to: 'registration#index', as: :new_user_registration
 
     resources :repositories, only: %i[index show new create] do
       scope module: :repositories do
