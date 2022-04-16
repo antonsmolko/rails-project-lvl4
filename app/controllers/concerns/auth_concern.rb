@@ -7,7 +7,6 @@ module AuthConcern
 
   def sign_out
     reset_session
-    redirect_back fallback_location: root_path, notice: t('notice.auth.sign_out')
   end
 
   def signed_in?

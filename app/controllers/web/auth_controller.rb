@@ -20,6 +20,7 @@ class Web::AuthController < Web::ApplicationController
 
   def destroy
     sign_out
+    redirect_to root_path, notice: t('notice.auth.sign_out')
   end
 
   private
