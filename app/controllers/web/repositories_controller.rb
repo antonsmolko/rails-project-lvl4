@@ -32,7 +32,7 @@ class Web::RepositoriesController < Web::ApplicationController
       return
     end
 
-    repository = current_user.repositories.where(github_id: github_id.to_i).first_or_create!
+    repository = current_user.repositories.where(github_id: github_id.to_i).first_or_create
 
     if repository
       UpdateInfoRepositoryJob.perform_later repository.id
