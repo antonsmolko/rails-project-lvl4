@@ -16,9 +16,11 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def new
     client = octokit_client_api.new current_user.token
-    client_repos = client.repos
 
-    @repositories = client_repos.select { |r| available_language? r[:language] }
+    @repositories = Rails.cache.fetch("user_#{current_user.id}_repos", expires_in: 12.hours) do
+      client.repos.select { |r| available_language? r[:language] }
+    end
+
     @repository = Repository.new
   end
 
