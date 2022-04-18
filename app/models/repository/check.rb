@@ -3,8 +3,8 @@
 class Repository::Check < ApplicationRecord
   include AASM
 
-  belongs_to :repository, dependent: :destroy
-  has_one :user, through: :repository, dependent: :destroy
+  belongs_to :repository
+  has_one :user, through: :repository
 
   aasm whiny_transitions: false do
     state :created, initial: true
