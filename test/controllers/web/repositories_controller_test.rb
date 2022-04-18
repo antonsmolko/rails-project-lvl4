@@ -25,26 +25,6 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create' do
-    uri_template = Addressable::Template.new 'https://api.github.com/user/repos'
-
-    response = load_fixture('files/javascript_repository_response.json')
-
-    stub_request(:get, uri_template)
-      .with(
-        headers: {
-          'Accept' => 'application/vnd.github.v3+json',
-          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Authorization' => 'token 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',
-          'Content-Type' => 'application/json',
-          'User-Agent' => 'Octokit Ruby Gem 4.22.0'
-        }
-      )
-      .to_return(
-        status: 200,
-        body: response,
-        headers: { 'Content-Type' => 'application/json' }
-      )
-
     attrs = {
       github_id: 1_296_269
     }
