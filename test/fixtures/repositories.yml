@@ -12,20 +12,6 @@ one:
   updated_at: 2021-12-13 20:12:46.942221
   user: :one
 
-two:
-  name: frontend-project-lvl2
-  full_name: johndoe/frontend-project-lvl2
-  owner_login: johndoe
-  url: https://api.github.com/repos/johndoe/frontend-project-lvl2
-  language: javascript
-  clone_url: https://api.github.com/repos/johndoe/frontend-project-lvl2.git
-  pushed_at: 2021-12-13 20:12:46.942221
-  last_commit_id: c5b480f
-  github_id: 1_296_267
-  created_at: 2021-12-13 20:12:46.942221
-  updated_at: 2021-12-13 20:12:46.942221
-  user: :two
-
 js:
   id: 1296269
   name: frontend-project-lvl1
