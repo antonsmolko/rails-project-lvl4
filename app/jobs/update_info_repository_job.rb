@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../services/repository_service'
-
 class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :default
 
