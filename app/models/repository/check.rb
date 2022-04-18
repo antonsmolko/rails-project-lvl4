@@ -6,6 +6,8 @@ class Repository::Check < ApplicationRecord
   belongs_to :repository
   has_one :user, through: :repository
 
+  default_scope { order(created_at: :desc) }
+
   aasm whiny_transitions: false do
     state :created, initial: true
     state :checking, :finished, :failed
