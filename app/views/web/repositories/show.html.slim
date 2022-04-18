@@ -22,7 +22,7 @@ table.table.table-hover.mt-4
       th(scope="col") = t('.description.check_passes')
       th(scope="col") = t('.description.created_at')
   tbody
-    - @repository.checks.each do |check|
+    - @repository.checks.order!('created_at DESC').each do |check|
       tr
         td
           = link_to check.id, repository_check_path(@repository.id, check.id)
