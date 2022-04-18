@@ -10,7 +10,7 @@ class Api::ChecksController < Api::ApplicationController
       return head :not_found
     end
 
-    check = repository.checks.create!
+    check = repository.checks.create
     CheckRepositoryJob.perform_later check.id
 
     head :ok
