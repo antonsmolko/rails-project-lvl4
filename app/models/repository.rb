@@ -3,7 +3,7 @@
 class Repository < ApplicationRecord
   extend Enumerize
 
-  has_many :checks, dependent: :destroy
+  has_many :checks, -> { order(created_at: :desc) }, dependent: :destroy
   belongs_to :user
 
   AVAILABLE_LANGUAGES = %w[javascript ruby].freeze
