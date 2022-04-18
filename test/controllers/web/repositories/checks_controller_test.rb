@@ -24,8 +24,6 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    perform_enqueued_jobs
-
     repository_last_check = @repository_js.reload.checks.last
     assert { repository_last_check.aasm_state == 'finished' }
     assert { repository_last_check.passed == true }
@@ -36,8 +34,6 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     post repository_checks_path @repository_ruby
 
     assert_response :redirect
-
-    perform_enqueued_jobs
 
     repository_last_check = @repository_ruby.reload.checks.last
     assert { repository_last_check.aasm_state == 'finished' }
