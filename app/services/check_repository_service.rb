@@ -13,18 +13,19 @@ class CheckRepositoryService
     issues_count = data[:issues_count]
     passed = issues_count.zero?
 
-    if check.update!(
+    if check.update(
       passed: passed,
       listing: data[:listing],
       issues_count: issues_count
     )
       check.finish!
     else
-      StandardError
+      throw StandardError
     end
 
-    check.send_failed unless passed
+    RepositoryCheckMailer.with(check).check_failed.deliver_later unless passed
   rescue StandardError => e
+    RepositoryCheckMailer.with(check).check_error.deliver_later
     StandardError.new("Check repository job error: #{e.message}")
     check.mark_as_failed!
   end

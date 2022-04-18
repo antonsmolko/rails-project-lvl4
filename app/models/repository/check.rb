@@ -22,8 +22,4 @@ class Repository::Check < ApplicationRecord
       transitions from: %i[created checking], to: :failed
     end
   end
-
-  def send_failed
-    RepositoryCheckMailer.with(check: self).check_failed.deliver_later
-  end
 end

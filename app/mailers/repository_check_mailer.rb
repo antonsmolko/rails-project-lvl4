@@ -5,4 +5,9 @@ class RepositoryCheckMailer < ApplicationMailer
     @check = params[:check]
     mail(to: @check.repository.user.email, subject: t('repository_check_mailer.check_failed.subject'))
   end
+
+  def check_error
+    @check = params[:check]
+    mail(to: @check.repository.user.email, subject: t('repository_check_mailer.check_error.subject'))
+  end
 end

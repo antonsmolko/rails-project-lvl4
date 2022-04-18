@@ -90,3 +90,7 @@ en:
       subject: Repository check report
       title: Repository %{repository} check report
       message: Validation failed or code contains errors
+    check_error:
+      subject: Repository check report
+      title: Repository %{repository} check report
+      message: Validation was interrupted by an error
