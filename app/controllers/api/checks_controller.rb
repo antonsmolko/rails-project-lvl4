@@ -8,9 +8,8 @@ class Api::ChecksController < Api::ApplicationController
       return head :not_found
     end
 
-    repository.update! has_webhook: true
-
-    UpdateInfoRepositoryJob.perform_later repository.id
+    check = repository.checks.create!
+    CheckRepositoryJob.perform_later check.id
 
     head :ok
   end

@@ -45,6 +45,10 @@ class OctokitClientApiStub
     get_response url, body, config
   end
 
+  def hook?(_)
+    false
+  end
+
   private
 
   def get_response(url, body = '{}', config = {})

@@ -24,4 +24,9 @@ class OctokitClientApi
   def create_hook(repo_id)
     @client.create_hook(repo_id, 'web', url: api_checks_url, content_type: 'json')
   end
+
+  def hook?(repo_id)
+    hooks = @client.hooks(repo_id)
+    hooks.any? { |hook| hook.config.url == api_checks_url }
+  end
 end
