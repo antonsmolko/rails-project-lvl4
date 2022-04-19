@@ -10,9 +10,7 @@ class CloneRepository
 
     exit_status = Open3.popen3("#{clone_cmd} #{repo_path}") { |_stdin, _o, _e, wait_thr| wait_thr.value }
 
-    if exit_status.exitstatus != 0
-      throw StandardError.new("Clone repository error: #{exit_status}")
-    end
+    raise StandardError.new("Clone repository error: #{exit_status}") unless exit_status.exitstatus.zero?
 
     repo_path
   end
