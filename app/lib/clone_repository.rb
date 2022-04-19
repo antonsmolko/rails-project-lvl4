@@ -8,9 +8,9 @@ class CloneRepository
 
     FileUtils.rm_r repo_path if Dir.exist? repo_path
 
-    exit_status = Open3.popen3("#{clone_cmd} #{repo_path}") { |_stdin, _o, _e, wait_thr| wait_thr.value }
+    exit_status = Open3.popen3("#{clone_cmd} #{repo_path}") { |_i, _o, _e, wait_thr| wait_thr.value }
 
-    raise StandardError.new("Clone repository error: #{exit_status}") unless exit_status.exitstatus.zero?
+    raise StandardError, "Clone repository error: #{exit_status}" unless exit_status.exitstatus.zero?
 
     repo_path
   end
