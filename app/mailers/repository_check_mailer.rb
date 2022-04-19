@@ -7,7 +7,7 @@ class RepositoryCheckMailer < ApplicationMailer
   end
 
   def check_error
-    @check, @error = params.pluck[:check, :error]
+    @check = params[:check]
     mail(to: @check.repository.user.email, subject: t('repository_check_mailer.check_error.subject'))
   end
 end
