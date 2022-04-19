@@ -23,10 +23,10 @@ class CheckRepositoryService
       raise StandardError, "Check can not be updated: #{check.id}"
     end
 
-    RepositoryCheckMailer.with(check).check_failed.deliver_later unless passed
+    RepositoryCheckMailer.with(check: check).check_failed.deliver_later unless passed
   rescue StandardError => e
     Rails.logger.error e.message.to_s
-    RepositoryCheckMailer.with(check).check_error.deliver_later
+    RepositoryCheckMailer.with(check: check).check_error.deliver_later
     check.mark_as_failed!
   end
 end
