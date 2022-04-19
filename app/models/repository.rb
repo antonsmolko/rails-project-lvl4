@@ -8,7 +8,7 @@ class Repository < ApplicationRecord
 
   AVAILABLE_LANGUAGES = %w[javascript ruby].freeze
 
-  enumerize :language, in: AVAILABLE_LANGUAGES, skip_validations: true
+  enumerize :language, in: AVAILABLE_LANGUAGES
 
   validates :github_id, presence: true
 
