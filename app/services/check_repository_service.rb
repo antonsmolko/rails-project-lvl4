@@ -25,7 +25,7 @@ class CheckRepositoryService
 
     RepositoryCheckMailer.with(check).check_failed.deliver_later unless passed
   rescue StandardError => e
-    Logger.error(e.message)
+    Logger.fatal "CheckRepositoryService error: #{e.message}"
     RepositoryCheckMailer.with(check: check, error: e.message).check_error.deliver_later
     check.mark_as_failed!
   end
