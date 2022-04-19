@@ -1,2 +1,5 @@
 h3 = t('.title', repository: @check.repository.full_name)
 p = t('.message')
+p = "Exception Class: #{@error.class.name}"
+p = "Exception Message: #{@error.message}"
+p = "Exception Backtrace: #{@error.backtrace}"

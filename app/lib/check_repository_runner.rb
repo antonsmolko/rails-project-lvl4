@@ -13,8 +13,12 @@ class CheckRepositoryRunner
 
     lint_cmd = COMMAND_MAP[repository.language.to_sym]
 
-    output = Open3.capture3("cd #{dir_path} && #{lint_cmd}") { |_stdin, stdout| stdout.read }
+    output, exit_status = Open3.popen3("cd #{dir_path} && #{lint_cmd}") { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
 
-    JSON.parse(output[0])
+    if exit_status.exitstatus != 0
+      throw StandardError.new("Check repository error: #{exit_status}")
+    end
+
+    JSON.parse(output)
   end
 end
