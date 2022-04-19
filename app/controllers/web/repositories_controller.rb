@@ -11,6 +11,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = repository_resource
+    @checks = @repository.checks.order created_at: :desc
     authorize @repository
   end
 
