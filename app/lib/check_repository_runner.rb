@@ -13,7 +13,9 @@ class CheckRepositoryRunner
 
     lint_cmd = COMMAND_MAP[repository.language.to_sym]
 
-    output, exit_status = Open3.popen3("cd #{dir_path}") { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
+    repository_path = Rails.root.join dir_path
+
+    output, exit_status = Open3.popen3("cd #{repository_path}") { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
 
     raise StandardError, "Check repository error: #{exit_status}" unless exit_status.exitstatus.zero?
 
