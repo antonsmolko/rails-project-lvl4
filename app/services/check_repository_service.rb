@@ -20,7 +20,7 @@ class CheckRepositoryService
     )
       check.finish!
     else
-      throw StandardError
+      raise StandardError, "Check can not be updated: #{check.id}"
     end
 
     RepositoryCheckMailer.with(check).check_failed.deliver_later unless passed
