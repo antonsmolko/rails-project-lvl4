@@ -7,7 +7,7 @@ class CheckRepositoryRunner
     raise StandardError, "Directory does not exist: #{path_to_repository}" unless Dir.exist? path_to_repository
 
     command_map = {
-      javascript: "npx eslint #{path_to_repository} --format=json --config ./.eslintrc.yml  --no-eslintrc",
+      javascript: "node_modules/eslint/bin/eslint.js #{path_to_repository} --format=json --config ./.eslintrc.yml  --no-eslintrc",
       ruby: "bundle exec rubocop #{path_to_repository} --format=json --config ./.rubocop.yml"
     }
 
