@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 class CheckRepositoryRunner
-  COMMAND_MAP = {
-    javascript: 'npx eslint -f json',
-    ruby: 'rubocop --format json'
-  }.freeze
-
   def self.start(repository)
-    dir_path = CloneRepository.start repository
+    path_to_repository = CloneRepository.start repository
 
-    raise StandardError, "Directory does not exist: #{dir_path}" unless Dir.exist? dir_path
+    raise StandardError, "Directory does not exist: #{path_to_repository}" unless Dir.exist? path_to_repository
 
-    lint_cmd = COMMAND_MAP[repository.language.to_sym]
+    command_map = {
+      javascript: "npx eslint #{path_to_repository} --format=json --config ./.eslintrc.yml  --no-eslintrc",
+      ruby: 'rubocop --format json'
+    }
 
-    output, exit_status = Open3.popen3("cd #{dir_path} && #{lint_cmd}") { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
+    command = command_map[repository.language.to_sym]
 
-    raise StandardError, "Check repository error: #{dir_path}" unless exit_status.exitstatus.zero?
+    output = Open3.popen3(command) { |_i, stdout| stdout.read }
+
+    # raise StandardError, "Check repository error: #{path_to_repository}" unless exit_status.exitstatus.zero?
 
     JSON.parse(output)
   end
