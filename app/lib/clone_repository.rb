@@ -2,7 +2,7 @@
 
 class CloneRepository
   def self.start(repository)
-    repo_path = Rails.root.join('tmp/repos', repository.full_name).to_s
+    repo_path = File.join(Dir.tmpdir, 'repos', repository.full_name).to_s
 
     clone_cmd = "git clone #{repository.clone_url}"
 
