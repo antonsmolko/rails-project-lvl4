@@ -11,6 +11,8 @@ class CheckRepositoryRunner
       ruby: "bundle exec rubocop #{path_to_repository} --format=json --config ./.rubocop.yml"
     }
 
+    Rails.logger.debug path_to_repository
+
     command = command_map[repository.language.to_sym]
 
     output = Open3.popen3(command) { |_i, stdout| stdout.read }
