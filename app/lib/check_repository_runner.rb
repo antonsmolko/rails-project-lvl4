@@ -7,14 +7,15 @@ class CheckRepositoryRunner
     raise StandardError, "Directory does not exist: #{path_to_repository}" unless Dir.exist? path_to_repository
 
     command_map = {
-      javascript: "node_modules/eslint/bin/eslint.js #{path_to_repository} --format=json --config ./.eslintrc.yml  --no-eslintrc",
-      ruby: 'rubocop --format json'
+      javascript: "npx eslint #{path_to_repository} --format=json --config ./.eslintrc.yml  --no-eslintrc",
+      ruby: "bundle exec rubocop #{path_to_repository} --format=json --config ./.rubocop.yml"
     }
 
     command = command_map[repository.language.to_sym]
 
     output = Open3.popen3(command) { |_i, stdout| stdout.read }
 
+    # @TODO: Всегда возвращает exitstatus > 0
     # raise StandardError, "Check repository error: #{path_to_repository}" unless exit_status.exitstatus.zero?
 
     JSON.parse(output)
