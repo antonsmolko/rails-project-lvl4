@@ -9,6 +9,8 @@ ruby '3.0.2'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+gem 'rubocop'
+gem 'rubocop-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -36,8 +38,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'rubocop'
-  gem 'rubocop-rails'
   gem 'slim_lint'
   gem 'sqlite3', '~> 1.4'
 end
