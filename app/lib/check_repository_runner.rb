@@ -12,10 +12,8 @@ class CheckRepositoryRunner
     }
 
     command = command_map[repository.language.to_sym]
-    Rails.logger.debug command
 
     output = Open3.popen3(command) { |_i, stdout| stdout.read }
-    Rails.logger.debug output
 
     # @TODO: Всегда возвращает exitstatus > 0
     # output, exit_status = Open3.popen3(command) { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
