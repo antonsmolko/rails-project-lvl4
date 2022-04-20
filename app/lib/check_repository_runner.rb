@@ -19,6 +19,6 @@ class CheckRepositoryRunner
     # output, exit_status = Open3.popen3(command) { |_i, stdout, _e, wait_thr| [stdout.read, wait_thr.value] }
     # raise StandardError, "Check repository error: #{path_to_repository}" unless exit_status.exitstatus.zero?
 
-    JSON.parse(output)
+    JSON.parse(output.presence || {})
   end
 end
