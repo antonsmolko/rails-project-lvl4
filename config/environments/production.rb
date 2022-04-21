@@ -120,13 +120,13 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: ENV.fetch('APP_HOST') }
+  config.action_mailer.default_url_options = { host: ENV.fetch('APP_HOST', nil) }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name: ENV.fetch('MAIL_USERNAME'),
-    password: ENV.fetch('MAIL_PASSWORD'),
-    address: ENV.fetch('MAIL_HOST'),
-    domain: ENV.fetch('MAIL_HOST'),
+    user_name: ENV.fetch('MAIL_USERNAME', nil),
+    password: ENV.fetch('MAIL_PASSWORD', nil),
+    address: ENV.fetch('MAIL_HOST', nil),
+    domain: ENV.fetch('MAIL_HOST', nil),
     port: ENV.fetch('SMTP_PORT', '25'),
     authentication: :cram_md5
   }
