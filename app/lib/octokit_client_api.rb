@@ -6,7 +6,7 @@ class OctokitClientApi
   attr_accessor :client
 
   def initialize(access_token)
-    @client = Octokit::Client.new access_token: access_token
+    @client = Octokit::Client.new access_token: access_token, per_page: 100
   end
 
   def repos
