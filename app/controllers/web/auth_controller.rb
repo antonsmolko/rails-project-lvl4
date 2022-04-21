@@ -10,7 +10,7 @@ class Web::AuthController < Web::ApplicationController
     user.image_url = auth_info[:image]
     user.token = auth[:credentials][:token]
 
-    if user.save!
+    if user.save
       sign_in user
       redirect_to root_path, notice: t('notice.auth.sign_in')
     else
